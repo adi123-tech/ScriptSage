@@ -4,3 +4,4 @@
 2] cd server and type npm run dev
 3] cd client and type npm start
 
+
