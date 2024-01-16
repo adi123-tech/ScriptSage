@@ -1,0 +1,350 @@
+    /* Add some basic styling to make it look like a navigation bar */
+    @import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
+    *{
+      margin: 0;
+      padding: 0;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body{
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #151723;
+    }
+    
+
+  nav {
+      color: white;
+      padding: 10px;
+      text-align: center;
+      position: absolute;
+      top: 50px;
+      right: 330px;
+  }
+
+  nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      margin: 0 5px;
+      transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition property for smooth scaling and font size change */
+  }
+  
+  nav a:hover {
+      font-size: 2em; /* Increase font size by a factor of 2 on hover */
+      transform: scale(1.1); /* Increase the scale on hover */
+  }
+  
+  nav a:not(:hover) {
+      transform: scale(1); /* Set the default scale for non-hovered state */
+      font-size: 1em; /* Set the default font size for non-hovered state */
+  }
+  
+  
+  
+   #Login 
+  {
+      width: auto;
+          color: white;
+          padding: 10px;
+          text-align: center;
+          position: absolute;
+          top: 40px;
+          right: 35px;
+  }
+
+  
+  button {
+      position: relative; /* Add relative positioning to the button */
+      overflow: hidden; /* Hide overflowing SVG parts */
+      /* Your existing styles remain the same */
+      width: 130px;
+      height: 40px;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid white;
+      outline: none;
+      transition: 1s ease-in-out;
+      border-radius: 5px;
+    }
+    
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      fill: none;
+      stroke: #fff;
+      background-color: transparent;
+      stroke-dasharray: 150 480;
+      stroke-dashoffset: 150;
+      transition: 1s ease-in-out;
+    }
+    
+    button:hover {
+      transition: 1s ease-in-out;
+      background: transparent;
+    }
+    
+    button:hover svg {
+      stroke-dashoffset: -480;
+    }
+    
+    button span {
+      display: block;
+      color: white;
+      font-size: 18px;
+      z-index: 5;
+      transition: background-color 0.3s ease-in-out; /* Add a transition only for the background-color property */
+    }
+      
+    .login-button {
+      background-color: #7533DF;
+    }
+    
+    .get-started-button {
+      left: 10px;
+      background-color: #7533DF;
+    }
+    
+  #Image1 {
+      z-index: -1;
+      position: absolute;
+      top: 15%;
+      right: 0; /* Set left to 0 */
+      width: 45%; /* Set width to 100% */
+      height: 100vh;
+      overflow: hidden;
+  }
+  
+
+  #Image1 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* or object-fit: contain; depending on your preference */
+      border-top-left-radius: 50px;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+  }
+  
+  .logo-container img {
+      position: absolute;
+      top: 30px;
+      left: 60px;
+      z-index: 3;
+      height: 80px; /* Adjust the height as needed */
+  }
+  
+  .website-name-container h1 {
+      font-size: 2.5rem;
+      position: absolute;
+      top: 45px;
+      left: 139px;
+      margin: 0;
+  }
+  
+  .navigation-container {
+      color: white;
+      text-align: center;
+  }
+ 
+   #PoweredBY{
+      text-align: left;
+      background-color: #23262F;
+      width: auto;
+      display: flex;
+      position: absolute;
+      top: 200px;
+      left: 70px;
+      height: 50px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-top-right-radius: 50px;
+     border-bottom-right-radius: 50px;
+     border-top-left-radius: 50px;
+     border-bottom-left-radius: 50px;
+     justify-content: center;
+     align-items: center;
+  }
+  
+  #PoweredBY p{
+      color: rgba(255, 255, 255, 0.523);
+      background-color: #23262F;
+  }
+
+  #maintext
+  {
+      text-align: left;
+      font-size: 3.2rem;
+      font-weight: bolder;
+      height: 300px;
+      width: 600px;
+      display: inline;
+      position: absolute;
+      top: 240px;
+      left: 60px;
+      padding: 10px;
+  }
+
+  #subtext
+  {
+      text-align: left;
+      font-size: 1rem;
+      width: 400px;
+      display: inline-block;
+      position: absolute;
+      top: 480px;
+      left: 70px;
+  }
+
+  #subtext p{
+      color: rgba(255, 255, 255, 0.523);
+  }
+
+
+  #Email {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      font-size: 0.6rem;
+      background-color: #23262F;
+      height: 50px;
+      width: 500px;
+      position: absolute;
+      top: 590px;
+      left: 70px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 15px;
+  }
+  
+  #Email input {
+      position: relative;
+      display: inline-block;
+      left: -10px;
+      color:rgba(255, 255, 255, 0.523);
+      background-color: #23262F;
+      border: none;
+      width: 80%; /* Take up 100% of the available width within the flex container */
+      margin: 0; /* Remove default input margin */
+      outline: none;
+  }
+  
+  #getstart{
+      position: absolute;
+      top: 595px;
+      left: 420px;
+      background-color: #23262F;
+  }
+
+  footer {
+      background-color: #23262F;
+      color: white;
+      padding: 20px 0; /* Add padding as needed */
+      text-align: center;
+      position: absolute;
+      top: 750px;
+      width: 100%;
+      left: 0;
+      display: inline-block ;
+      
+  }
+  
+  .footer-content {
+      background-color: #23262F;
+      display: flex;
+      justify-content: space-around;
+  }
+  
+  .footer-section {
+      background-color: #23262F;
+      flex: 1;
+      margin: 0 10px;
+  }
+  
+  .footer-bottom {
+      margin-top: 20px;
+  }
+
+  .content-container {
+      max-width: 100%; /* Ensure content does not exceed viewport width */
+      overflow-x: hidden; /* Hide horizontal scroll */
+  }
+  
+  
+/* Existing Styles Above */
+
+/* Media Query for Samsung Android Phones  NOT DONE YET*/  
+@media only screen and (max-width: 480px) {
+  nav {
+      right: 10px; /* Adjust as needed for smaller screens */
+  }
+
+  #Login {
+      top: 10px;
+      right: 10px;
+  }
+
+  .header-container {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+  }
+
+  .website-name-container h1 {
+      position: static;
+      margin-top: 10px;
+      text-align: center;
+  }
+
+  .logo-container img {
+      position: static;
+      margin-bottom: 10px;
+  }
+
+  #Image1 {
+      left: 0;
+      width: 100%;
+  }
+
+  #maintext {
+      font-size: medium;
+      top: 240px;
+      left: 10px;
+      width: 80%; /* Adjust as needed */
+  }
+
+  #subtext {
+      top: 480px;
+      left: 10px;
+      width: 80%; /* Adjust as needed */
+  }
+
+  #Email {
+      top: 590px;
+      left: 10px;
+      width: 80%; /* Adjust as needed */
+  }
+
+  #getstart {
+      top: 601px;
+      right: 20px;
+  }
+
+  footer {
+      display: none; /* Reset top position */
+  }
+}
+

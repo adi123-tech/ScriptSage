@@ -1,0 +1,70 @@
+/* Navbar.css */
+
+nav {
+  background-color: #333;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+}
+
+NavLink {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+NavLink:hover {
+  color: #61dafb;
+}
+
+/* Separate styling for each button */
+li:nth-child(1) NavLink {
+  background-color: #4CAF50;
+}
+
+li:nth-child(2) NavLink {
+  background-color: #2196F3;
+}
+
+li:nth-child(3) NavLink {
+  background-color: #f44336;
+}
+
+li:nth-child(4) NavLink {
+  background-color: #FFC107;
+}
+
+li:nth-child(5) NavLink {
+  background-color: #9c27b0;
+}
+
+/* Additional styling for buttons */
+NavLink {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 10px 15px;
+}
+
+NavLink:hover {
+  background-color: #555;
+  color: #fff;
+}

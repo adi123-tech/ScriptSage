@@ -1,0 +1,327 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #151723;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Inter', sans-serif;
+	height: 100vh;
+	margin: -20px 0 50px;
+}
+
+.container h1 {
+    color: white;
+	font-weight: bold;
+	margin: 0;
+}
+
+.container h2 {
+	text-align: center;
+}
+
+.container p {
+    color: black;
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+.container span {
+    color: white;
+	font-size: 12px;
+}
+
+.container a {
+	color: rgba(255, 255, 255, 0.523);
+	font-size: 14px;
+	text-decoration: none;
+	margin: 15px 0;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+.container button {
+        position: relative; /* Add relative positioning to the button */
+        overflow: hidden; /* Hide overflowing SVG parts */
+        /* Your existing styles remain the same */
+        width: 130px;
+        height: 40px;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid white;
+        outline: none;
+        transition: 1s ease-in-out;
+        border-radius: 5px;
+      }
+      
+      svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        fill: none;
+        stroke: #fff;
+        background-color: transparent;
+        stroke-dasharray: 150 480;
+        stroke-dashoffset: 150;
+        transition: 1s ease-in-out;
+      }
+      
+      .container  button:hover {
+        transition: 1s ease-in-out;
+        background: transparent;
+      }
+      
+      .container  button:hover svg {
+        stroke-dashoffset: -480;
+      }
+      
+      .container button span {
+        display: block;
+        color: white;
+        font-size: 18px;
+        z-index: 5;
+        transition: background-color 0.3s ease-in-out; /* Add a transition only for the background-color property */
+      }
+
+      .container .get-started-button {
+        background-color: #7533DF;
+      }
+
+form {
+	background-color: #23262F;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.container input {
+    color: #23262F;
+	background-color: #eee;
+	border: none;
+    border-radius: 15px;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.container {
+	background-color: #23262F;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+}
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.sign-up-container {
+	left: 0;
+	width: 50%;
+	opacity: 0;
+	z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.container.right-panel-active .overlay-container{
+	transform: translateX(-100%);
+}
+
+.overlay {
+	background: #7533DF;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(117,51,223,1) 0%, rgba(0,212,255,1) 83%, rgba(0,212,255,1) 92%); 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+    color: #23262F;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+  	transform: translateX(50%);
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+	transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+	transform: translateX(0);
+}
+
+.overlay-right {
+	right: 0;
+	transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+	transform: translateX(20%);
+}
+
+.social-container {
+	margin: 20px 0;
+}
+
+.social-container a {
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+}
+
+
+/*OTP style*/
+form .otp-field {
+	flex-direction: row;
+	column-gap: 10px;
+  }
+  .otp-field input {
+	height: 45px;
+	width: 42px;
+	border-radius: 6px;
+	outline: none;
+	font-size: 1.125rem;
+	text-align: center;
+	border: 1px solid #ddd;
+  }
+  .otp-field input:focus {
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  .otp-field input::-webkit-inner-spin-button,
+  .otp-field input::-webkit-outer-spin-button {
+	display: none;
+  }
+  .otp-field button {
+	z-index: 8;
+	margin-top: 25px;
+	width: 50%;
+	color: #fff;
+	font-size: 0.8rem;
+	border: none;
+	padding: 9px 0;
+	cursor: pointer;
+	border-radius: 6px;
+	pointer-events: none;
+	background: #6e93f7;
+	transition: all 0.2s ease;
+	position: relative;
+	bottom: 30px;
+  }
+  .otp-field button.active {
+	background: #4070f4;
+	pointer-events: auto;
+  }
+  .otp-field button:hover {
+	background: #0e4bf1;
+  }
+
+
+#img-forgot{
+	position: absolute;
+	z-index: 5;
+	height: 480px;
+	width: 350px;
+	right: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#img-forgot-2{
+	position: absolute;
+	z-index: 8;
+    filter: drop-shadow(0 0 0.75rem crimson);
+	height: 50%;
+	right: 50px;
+    top: 100px;
+}
+
+  
+  
+  /*Shake effect*/
+  
+
+  
