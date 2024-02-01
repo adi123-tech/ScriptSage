@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+const mongoose_app = require("mongoose");  // For App
+const mongoose_compiler = require("mongoose") // For Compiler
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const { exec } = require('child_process');
@@ -12,15 +13,27 @@ const accountSid = 'ACb2d2a6519d69b54e69450fb5e90c2e9f';
 const authToken = 'd0025b478653d89c1d061e5c761eedd0';
 const client = twilio(accountSid, authToken);
 
+// Compiler imports:
+const { generateFile } = require('./CompilerModules/generate_code_file')
+const  { executeCode } = require('./CompilerModules/execute_code')
+const Job = require('./CompilerModules/models/Job'); // Importing Job for creating each run a job.
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors()); 
 
 
-mongoose.connect("mongodb+srv://Aditya:mrnobody@cluster0.9ex6qts.mongodb.net/Chatbot", {
+mongoose_app.connect("mongodb+srv://Aditya:mrnobody@cluster0.9ex6qts.mongodb.net/Chatbot", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// Connecting to localhost for Compiler.
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/compilerapp');
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
 
 
 // Create a login & signup data schema
@@ -36,8 +49,8 @@ const signupSchema = {
   phoneNumber: String 
 }
 
-const Login = mongoose.model("Login", loginSchema);
-const Signup = mongoose.model("Signup", signupSchema);
+const Login = mongoose_app.model("Login", loginSchema);
+const Signup = mongoose_app.model("Signup", signupSchema);
 
 
 app.use(express.static(__dirname));
@@ -229,6 +242,78 @@ app.post('/send-otp', (req, res) => {
       res.status(500).json({ success: false, message: 'Error sending OTP' });
     });
 });
+
+
+// Compiler Route:
+app.post("/run", async (req, res) => {
+  // Language = C 
+  const { language = "c", code } = req.body;
+  // console.log(language, code.length);
+
+  // Check if code is given or not
+  if(code === undefined)
+  {
+      return res.status(400).json({success: false, error: "Empty code body"})
+  }
+
+  let job;
+
+  try {
+      // Generate a c file with content from the request
+      const filepath = await generateFile(language, code);
+      console.log(filepath);
+
+      job = await new Job({language, filepath}).save();
+      const jobId = job["_id"];
+      
+      res.status(200).json({success: true, jobId});
+      
+      job["startedAt"] = new Date();
+      // Run the file and send the response back
+      const output = await executeCode(filepath);
+      console.log({filepath, output});
+      
+      job["completedAt"] = new Date();
+      job["status"] = "success";
+      job["output"] = output;
+      
+      await job.save();
+      
+      console.log(job);
+      // return res.json({ filepath, output });
+  } catch (err)
+  {
+      job["compeltedAt"] = new Date();
+      job["status"] = "error";
+      job["output"] = JSON.stringify(err);
+      await job.save();
+      console.log(err);
+      // res.status(500).json({ err });
+  }
+});
+
+app.get("/status", async(req, res) => {
+  const jobId = req.query.id;
+
+  if(jobId == undefined)
+  {
+      return res.status(400).json({success: false, error: "missing id query param"})
+  }
+
+  try {
+      const job = await Job.findById(jobId);
+
+      if(job === undefined)
+      {
+          return res.status(404).json({success: false, error: "invalid job id"});
+      }
+
+      return res.status(200).json({success: true, job});
+  } catch (error) {
+      return res.status(400).json({success: false, error: JSON.stringify(err)});
+  }
+
+})
 
 
 

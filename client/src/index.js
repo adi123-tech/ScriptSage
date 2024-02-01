@@ -5,11 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './Pages/LoginPage/Login';
 import Forgot from './Pages/ForgotPassPage/Forgot';
-import Chatbot from './Pages/MainPage/Chatbot Pages/Chatbot';
-import Compiler from './Pages/MainPage/Chatbot Pages/Compiler';
-import Quiz from './Pages/MainPage/Chatbot Pages/Quiz';
-import Settings from './Pages/MainPage/Chatbot Pages/Settings';
-import Tutorials from './Pages/MainPage/Chatbot Pages/Tutorials';
+import Chatbot from './Pages/MainPage/Chatbot Pages/Chatbot/Chatbot';
+import Compiler from './Pages/MainPage/Chatbot Pages/Compiler/Compiler';
+import Quiz from './Pages/MainPage/Chatbot Pages/Quiz/Quiz';
+import Settings from './Pages/MainPage/Chatbot Pages/Settings/Settings';
+import Tutorials from './Pages/MainPage/Chatbot Pages/Tutorial/Tutorials';
 import 'react-notifications/lib/notifications.css';
 
 import {

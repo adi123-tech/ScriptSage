@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    /* background-color: #151723; */
+}
+
+.code-section textarea {
+    width: 100%;
+    padding: 10px; /* External padding */
+    padding-top: 15px; /* Internal padding top */
+    padding-right: 15px; /* Internal padding right */
+    padding-bottom: 15px; /* Internal padding bottom */
+    padding-left: 15px; /* Internal padding left */
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 14px;
+}
+
+.compiler-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.status-bar p {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #000  ;
+}
+
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
