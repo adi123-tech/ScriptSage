@@ -24,6 +24,7 @@ export default function Navbar() {
   };
 
   return (
+    <div className="nav1">
     <nav>
       <ul>
         <li>
@@ -53,5 +54,6 @@ export default function Navbar() {
         </li>
       </ul>
     </nav>
+    </div>
   );
 }

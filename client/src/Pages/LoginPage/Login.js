@@ -24,7 +24,7 @@ function Login() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberValidation, setPhoneNumberValidation] = useState('');
 // Inside your Login component
-  // Inside your Login component
+// Inside your Login component
 const errorStyle = {
   color: 'red',
   fontSize: '10px',
@@ -304,9 +304,6 @@ const errorStyle = {
   };
   
   
-  
-  
-  
   return (
     <div className="container" id="container">
       <div className="form-container sign-up-container">
@@ -508,7 +505,7 @@ const errorStyle = {
               <svg width="180px" height="60px" viewBox="0 0 180 60" className="border">
                 <polyline points="179,1 179,59 1,59 1,1 179,1" className="bg-line" />
                 <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line" />
-              </svg><span>Get Started</span>
+              </svg><span>SignUp</span>
             </button>
           </div>
         </div>

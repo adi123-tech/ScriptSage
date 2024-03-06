@@ -1,0 +1,394 @@
+.abcd{
+    body {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        line-height: 1.4;
+        background-color: #151723;
+        margin: 0;
+        padding: 30px;
+        overflow: hidden; 
+      }
+      
+      h1{
+        margin-top: 15px;
+        text-align: left;
+        padding-left: 150px;
+      }
+      
+      .row {
+        margin-top: 15px;
+      }
+      
+      .user-messages {
+        position: absolute;
+        left: 0px;
+        height: 350px;
+        overflow: auto;
+        padding: 10px;
+        width: 250px;
+        background-color: #ffffff00;
+        z-index: 1000;
+      }
+      
+      .chat-box {
+        height: 350px;
+        overflow: auto;
+        padding: 10px;
+      }
+      
+      .chat-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        left: 850px;
+      }
+      
+      .user-message {
+        background-color: #283142;
+        color: #fff;
+        font-size: 20px;
+      }
+      
+      .bot-message {
+        z-index: 3;
+        background-color: #283142;
+        color: white;
+        font-size: 20px;
+      }
+      
+      .message-text pre code {
+        font-size: 14px;
+        white-space: pre-wrap;
+      }
+      
+      .user-icon,
+      .bot-icon {
+        font-size: 20px;
+        margin-right: 10px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .col-md-9{
+        position: relative;
+        left: -200px;
+      }
+      
+      .chat-box-container {
+        background-color: #283142; /* Set the desired background color */
+        border: 5px solid red;
+        border-radius: 15px;
+      }
+      
+      button{ 
+        height: 40px;
+        width: 100px;
+        border-radius: 5px;
+        background-color: #23262F;
+      
+      }
+      
+      .get-started-button{
+        position: relative;
+        bottom: 5px;
+        left: 20px;
+        background-color: #7533DF;
+        color: white;
+      }
+      
+      button{ 
+        height: 40px;
+        width: 100px;
+        border-radius: 5px;
+        background-color: #23262F;
+      }
+      
+      
+      .clear-button{
+        position: relative;
+        bottom: 5px;
+        left: 20px;
+        background-color: #23262F;
+        color: white;
+      }
+      
+      
+      
+      #mic-icon{
+        background-color: rgb(127, 24, 216);
+        position: relative;
+        left: 30px;
+        bottom: 5px;
+      }
+      
+      #mic-slash-icon{
+        background-color: rgb(127, 24, 216);
+        position: relative;
+        left: 30px;
+        bottom: 5px;
+      }
+      
+      #read-aloud-icon{
+        background-color: rgb(127, 24, 216);
+        position: relative;
+        left: 250px;
+        bottom: 5px;
+        z-index: 2;
+      }
+      
+      #mute-icon{
+        background-color: rgb(127, 24, 216);
+        position: relative;
+        left: 250px;
+        bottom: 5px;
+        z-index: 6;
+      }
+      
+      .form-control {
+        position: relative;
+        left: 15%;
+        bottom: 20px;
+        width: 500px;
+        background-color: #283142;
+        color: white;
+        border-radius: 30px;
+        text-align: center;
+      }
+      
+      .form-control:focus {
+        background-color: #283142; /* Set the desired background color when focused */
+        color: white; /* Set the desired text color when focused */
+        border-color: #7533DF; /* Set the desired border color when focused */
+        outline: none; /* Remove the default outline when focused */
+        box-shadow: none; /* Remove the default box shadow when focused */
+      }
+      
+      .get-started-button,
+      .clear-button {
+        transition: background-color 0.3s ease, color 0.3s ease; /* Set the desired transition properties */
+      }
+      
+      
+      .clear-button:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Set the desired transparency on hover */
+        border-radius: 5px;
+      }
+      
+      
+      
+      .mic-button,
+      .read-aloud-button,
+      .mute-button {
+        border: 2px solid #ccc;
+      }
+      
+      /* Styles for hover state when not in use */
+      .mic-button:not(.active):hover {
+        border-color: red;
+      }
+      
+      .read-aloud-button:not(.active):hover {
+        border-color: red;
+      }
+      
+      
+      
+      /* Styles for hover state when in use */
+      .mic-button-slash:not(.active):hover {
+        border: 2px solid green;
+      }
+      
+      .mute-button:not(.active):hover {
+        border: 2px solid green;
+      }
+      
+      
+      .get-started-button:hover{
+        background-color: #7533dfa6; /* Set the desired transparency on hover */
+        border-radius: 5px;
+      }
+      
+      .mic-button:hover::before{
+        content: "Click to start voice recognition"; /* Set the desired short description */
+        position: absolute;
+        top: 100%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.46); /* Tooltip background color */
+        color: white; /* Tooltip text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease; /* Set the desired transition properties */
+        width: 100px;
+      }
+      
+      .mic-button-slash:hover::before{
+        content: "Click to stop voice recognition"; /* Set the desired short description */
+        position: absolute;
+        top: 100%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.46); /* Tooltip background color */
+        color: white; /* Tooltip text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease; /* Set the desired transition properties */
+        width: 100px;
+      }
+      
+      .mic-button:hover::before,
+      .mic-button-slash:hover::before {
+        opacity: 1; /* Show the tooltip on hover */
+      }
+      
+      
+      
+      .read-aloud-button:hover::before {
+        content: "Start read aloud"; /* Set the desired short description */
+        position: absolute;
+        top: 100%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.46); /* Tooltip background color */
+        color: white; /* Tooltip text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease; /* Set the desired transition properties */
+        width: 100px;
+      }
+      
+      .read-aloud-button:hover::before {
+        opacity: 1; /* Show the tooltip on hover */
+      }
+      
+      
+      .mute-button:hover::before {
+        content: "Stop read aloud"; /* Set the desired short description */
+        position: absolute;
+        top: 100%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.46); /* Tooltip background color */
+        color: white; /* Tooltip text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease; /* Set the desired transition properties */
+        width: 100px;
+      }
+      
+      .mute-button:hover::before {
+        opacity: 1; /* Show the tooltip on hover */
+      }
+      
+      #RightSideBar {
+        height: 100vh;
+        width: 150px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        position: fixed;
+        background-color: #23262F;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.677); /* Adjust the shadow properties as needed */
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .sidebarbutton{
+        background-color: #7533DF;
+        color: white;
+        margin-bottom: 8px;
+      }
+      
+      #compiler-section {
+        width: 900px;
+        height: 500px;
+        position: relative;
+        left: 48%;
+        transform: translateX(-50%);
+        background-color: purple;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1100px; /* Adjust the margin-top value based on the space you want to add */
+        bottom: 125px; /* Adjust the bottom value based on the space you want at the bottom */
+        border-radius: 15px;
+      }
+      
+      
+      #comptag{
+        position: absolute;
+        margin-top: 160px;
+        top: 1400px;
+        left: 200px;
+      }
+
+
+.loading-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0 5px;
+  animation: dot-fade 1.5s infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes dot-fade {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  filter: blur(5px); /* Apply blur to the overlay itself */
+}
+}
+
