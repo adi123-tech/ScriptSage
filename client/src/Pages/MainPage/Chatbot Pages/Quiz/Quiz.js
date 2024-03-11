@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
+import Quizlogo from './Quizlogo';
 import './quiz.css';
 
 function Quiz() {
@@ -240,7 +241,9 @@ function Quiz() {
             <br />
           </div>
         ))}
+        <div className='analyze-quiz'>
         <button onClick={finishQuiz}>Analyze Quiz</button>
+        </div>
       </div>
     );
   };
@@ -275,7 +278,10 @@ function Quiz() {
             </tbody>
           </table>
         </div>
+        <div className='end-quiz'>
         <button onClick={redirectToStartQuiz}>End Quiz</button>
+        </div>
+        
       </div>
     );
   };
@@ -288,11 +294,12 @@ function Quiz() {
   };
 
   return (
+    
     <div className='quiz-container'>
       <Navbar />
+      <Quizlogo/>
       {currentSection === null ? (
-        <div>
-          <h1>Choose a Section to Start Quiz</h1>
+        <div className='quiz-modules'> 
           {sections.map((section, index) => (
             <div key={index}>
               <button onClick={() => startQuiz(index)}>

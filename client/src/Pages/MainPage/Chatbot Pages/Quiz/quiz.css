@@ -1,16 +1,17 @@
 /* Quiz.css */
 
 .quiz-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    position: absolute;
-    right: 35%;
-    top: 50px;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+  justify-content: center ; /* Distribute items along the main axis */
+  align-items: center; /* Align items vertically */
+  position: absolute;
+  right: 35%;
+  top: 50px;
+}
   
   .quiz-container h1 {
     text-align: center;
@@ -34,8 +35,8 @@
     font-weight: bolder;
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #590909;
+    background-color: #7F18D8;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -43,15 +44,19 @@
     height: 200px;
     width: 200px;
     right: -24%;
+    border: 4px solid #0056b3; /* Add border color and width */
+    border-radius: 10px;
   }
   
   .quiz-container button:hover {
     background-color: #0056b3;
     color: white;
+    border: 4px solid #7e18d8c2; /* Add border color and width */
+    border-radius: 10px;
   }
   
   .result {
-    margin-top: 20px;
+    margin-top: 60px;
   }
   
   .result p {
@@ -81,3 +86,46 @@
     font-size: 1.5em; /* Adjust the font size as needed */
   }
   
+
+  
+
+  /* Quiz.css */
+
+.quiz-modules {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+  justify-content: space-evenly; /* Distribute items along the main axis */
+  position: relative;
+  top: 120px;
+  left: 100px;
+}
+
+.quiz-modules > div {
+  width: calc(33.33% - 20px); /* Calculate width for three items with margin */
+  margin-bottom: 20px; /* Add margin between items */
+}
+
+.quiz-modules button {
+  width: 100%; /* Make buttons take full width of their container */
+}
+
+
+.analyze-quiz{
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+}
+
+.analyze-quiz button{
+  height: 50px;
+}
+
+.end-quiz{
+  position: absolute;
+  bottom: 0px;
+  right: -220px;
+}
+
+.end-quiz button{
+  height: 50px;
+}
