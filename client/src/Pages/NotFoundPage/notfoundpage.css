@@ -1,0 +1,55 @@
+
+  
+  .notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Position the container relatively */
+    overflow: hidden; /* Disable scrolling for the container */
+  }
+  
+  .notfound-container img {
+    width: 100%; /* Adjust size as needed */
+    animation: bounce 2s infinite alternate; /* Apply the bounce animation */
+  }
+  
+  .notfound-container h1 {
+    margin-top: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: transparent; /* Make the original text transparent */
+    position: absolute; /* Position the text relatively */
+    top: 50%; /* Position text at the center vertically */
+    left: 50%; /* Position text at the center horizontally */
+    transform: translate(-50%, -50%); /* Center text */
+    z-index: 1; /* Ensure text appears above the image */
+  }
+  
+  .notfound-container h1::before,
+  .notfound-container h1::after {
+    content: "You Didn't Know the URL BRO...."; /* Set the content of the pseudo-elements */
+    position: absolute; /* Position the pseudo-elements absolutely */
+    color: red; /* Apply the text color */
+    z-index: 1; /* Ensure text appears above the image */
+  }
+  
+  .notfound-container h1::before {
+    top: -10px; /* Adjust the position of the first cloned text */
+    left: -10px; /* Adjust the position of the first cloned text */
+  }
+  
+  .notfound-container h1::after {
+    bottom: -10px; /* Adjust the position of the second cloned text */
+    right: -10px; /* Adjust the position of the second cloned text */
+  }
+  
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px); /* Adjust bounce height as needed */
+    }
+  }
+  

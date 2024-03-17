@@ -10,7 +10,7 @@ const cors = require("cors");
 const twilio = require('twilio');
 
 const accountSid = 'ACb2d2a6519d69b54e69450fb5e90c2e9f';
-const authToken = 'd0025b478653d89c1d061e5c761eedd0';
+const authToken = '3c9a9f46ff90f085078a55081b6b8dbb';
 const client = twilio(accountSid, authToken);
 
 // Compiler imports:
@@ -38,16 +38,20 @@ async function main() {
 
 // Create a login & signup data schema
 const loginSchema = {
+  userId: String, // Adding userId field
   email: String,
   password: String,
   phoneNumber: String,
 }
+
 const signupSchema = {
+  userId: String, // Adding userId field
   name: String,
   email: String,
   password: String,
   phoneNumber: String 
 }
+
 
 const Login = mongoose_app.model("Login", loginSchema);
 const Signup = mongoose_app.model("Signup", signupSchema);
@@ -101,8 +105,14 @@ app.post("/login", function (req, res) {
 });
 
 // Signup route
+const { v4: uuidv4 } = require('uuid');
+
+// Signup route with unique userId
 app.post("/signup", function (req, res) {
   const { name, email, password, phoneNumber } = req.body;
+
+  // Generate a unique userId
+  const userId = uuidv4();
 
   // Check if user with the given email already exists
   Signup.findOne({ email: email })
@@ -117,8 +127,9 @@ app.post("/signup", function (req, res) {
             console.error(err);
             res.send("Error occurred during signup. Please try again.");
           } else {
-            // Create a new user
+            // Create a new user with userId
             const newSignup = new Signup({
+              userId: userId,
               name: name,
               email: email,
               password: hashedPassword,
@@ -130,6 +141,7 @@ app.post("/signup", function (req, res) {
               .then(() => {
                 // Update the Login collection as well
                 const newLogin = new Login({
+                  userId: userId,
                   email: email,
                   password: hashedPassword,
                 });
@@ -157,6 +169,7 @@ app.post("/signup", function (req, res) {
       res.send("Error occurred during signup. Please try again.");
     });
 });
+
 
 // Forgot password route
 app.post("/forgotpass", function (req, res) {

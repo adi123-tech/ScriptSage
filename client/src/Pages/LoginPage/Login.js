@@ -1,16 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useContext } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import "./login.css";
-import { validateEmail, validatePassword ,validateIndianPhoneNumber } from '../Validations/Validation_Utils';
-import Email_Validations from '../Notification Popups/Email_Validations';
-import Password_Validations from '../Notification Popups/Password_Validations';
-import User_Not_Found from '../Notification Popups/User_Not_Found';
-import Good from '../Notification Popups/Good';
-import Phone_Validations from '../Notification Popups/Phone_Validations';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
 
+
+function Login({ handleLoginStatus }) {
+  const navigate = useNavigate();
   const [otpInputs, setOtpInputs] = useState(Array(4).fill(''));
   const sendOtpButtonRef = useRef(null);
   const verifyOtpButtonRef = useRef(null);
@@ -24,7 +21,7 @@ function Login() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberValidation, setPhoneNumberValidation] = useState('');
 // Inside your Login component
-  // Inside your Login component
+// Inside your Login component
 const errorStyle = {
   color: 'red',
   fontSize: '10px',
@@ -33,6 +30,9 @@ const errorStyle = {
   fontStyle: 'italic', 
   fontWeight: 'bold',
 };
+
+
+
 
 
   
@@ -241,7 +241,9 @@ const errorStyle = {
   
         if (data.success) {
           // Redirect to the home page
-          window.location.href = '/chatbot';
+          handleLoginStatus(true);
+          navigate('/chatbot');
+          
         } else {
           // Handle other responses or errors
           console.error(data.message);
@@ -255,9 +257,10 @@ const errorStyle = {
   }
   
 
-  function handleSignupForm(event) { //signupform
+  function handleSignupForm(event) {
     event.preventDefault();
   
+    
     let userData = {
       name: event.target.name.value,
       email: event.target.email.value,
@@ -279,8 +282,9 @@ const errorStyle = {
   
         // Check if the response contains "Signup successful"
         if (data.includes("Signup successful")) {
+          handleLoginStatus(true);
+          navigate('/chatbot');
           // Redirect to the login page or any other page as needed
-          window.location.href = '/chatbot';
         } else {
           // Handle other responses (e.g., show an error message)
           console.error(data);
@@ -302,9 +306,6 @@ const errorStyle = {
       handleSignupForm(e); // Call the signup form submission function
     }
   };
-  
-  
-  
   
   
   return (
@@ -333,12 +334,11 @@ const errorStyle = {
           {phoneNumberValidation  === 'invalid' && (
             <div>
             <p style={errorStyle}>Invalid Phone Number format</p>
-            <Phone_Validations/>
             </div>
           )}
           {phoneNumberValidation  === 'valid' && (
             <div>
-            <Good/>
+            {/* <Good/> */}
             </div>
           )}
 
@@ -354,12 +354,12 @@ const errorStyle = {
           {emailValidation === 'invalid' && (
             <div>
             <p style={errorStyle}>Invalid email format</p>
-            <Email_Validations/>
+            {/* <Email_Validations/> */}
             </div>
           )}
           {emailValidation === 'valid' && (
             <div>
-            <Good/>
+            {/* <Good/> */}
             </div>
           )}
 
@@ -376,12 +376,12 @@ const errorStyle = {
           {passwordValidation === 'invalid' && (
             <div>
               <p style={errorStyle}>Password must be at least 8 characters long</p>
-              <Password_Validations/>
+              {/* <Password_Validations/> */}
             </div>
           )}
           {passwordValidation === 'valid' && (
             <div>
-              <Good/>
+              {/* <Good/> */}
             </div>
           )}
           <div className="otp-field">
@@ -429,7 +429,7 @@ const errorStyle = {
           {loginError && (
             <div>
             <p style={errorStyle}>Login failed. Please check your credentials.</p>
-            <User_Not_Found/>
+            {/* <User_Not_Found/> */}
          </div>
           )}
           
@@ -446,12 +446,12 @@ const errorStyle = {
           {emailValidation === 'invalid' && (
             <div>
             <p style={errorStyle}>Invalid email format</p>
-            <Email_Validations/>
+            {/* <Email_Validations/> */}
             </div>
           )}
           {emailValidation === 'valid' && (
             <div>
-            <Good/>
+            {/* <Good/> */}
             </div>
           )}
 
@@ -468,12 +468,12 @@ const errorStyle = {
           {passwordValidation === 'invalid' && (
             <div>
               <p style={errorStyle}>Password must be at least 8 characters long</p>
-              <Password_Validations/>
+              {/* <Password_Validations/> */}
             </div>
           )}
           {passwordValidation === 'valid' && (
             <div>
-              <Good/>
+              {/* <Good/> */}
             </div>
           )}
 
@@ -508,7 +508,7 @@ const errorStyle = {
               <svg width="180px" height="60px" viewBox="0 0 180 60" className="border">
                 <polyline points="179,1 179,59 1,59 1,1 179,1" className="bg-line" />
                 <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line" />
-              </svg><span>Get Started</span>
+              </svg><span>SignUp</span>
             </button>
           </div>
         </div>

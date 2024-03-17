@@ -1,10 +1,10 @@
 import React from 'react';
 import "../LoginPage/login.css";
 import axios from 'axios';
-import Email_Validations from '../Notification Popups/Email_Validations';
-import Password_Validations from '../Notification Popups/Password_Validations';
-import User_Not_Found from '../Notification Popups/User_Not_Found';
-import Good from '../Notification Popups/Good';
+// import Email_Validations from '../Notification Popups/Email_Validations';
+// import Password_Validations from '../Notification Popups/Password_Validations';
+// import User_Not_Found from '../Notification Popups/User_Not_Found';
+// import Good from '../Notification Popups/Good';
 
 class Forgot extends React.Component {
   constructor(props) {
@@ -299,12 +299,12 @@ class Forgot extends React.Component {
       <div className="container" id="container">
         <div className="form-container sign-in-container">
           <form onSubmit={this.handleForgotPassForm}>
-            {emailValidationNeeded && <Email_Validations />}
-            {!emailValidationNeeded && <Good />}
-            {newpasswordValidationNeeded && <Password_Validations />}
-            {!newpasswordValidationNeeded && <Good />}
-            {emailNotFound && <User_Not_Found />}
-            {!emailNotFound && <Good />}
+            {emailValidationNeeded}
+            {!emailValidationNeeded}
+            {newpasswordValidationNeeded }
+            {!newpasswordValidationNeeded}
+            {emailNotFound}
+            {!emailNotFound}
             <h1>Reset Password</h1>
             <span>Enter your email and new password</span>
             <input
