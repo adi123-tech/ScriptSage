@@ -87,7 +87,7 @@ app.post("/login", function (req, res) {
 
           if (result) {
             // Passwords match
-            res.json({ success: true, message: "Login successful" });
+            res.json({ success: true, message: "Login successful", userId: foundUser.userId });
           } else {
             // Passwords do not match
             res.status(401).json({ error: "User and password do not match. Login failed." });
@@ -149,7 +149,7 @@ app.post("/signup", function (req, res) {
                 // Save the user to the Login collection
                 newLogin.save()
                   .then(() => {
-                    res.send("Signup successful! You can now log in.");
+                    res.json({ success: true, message: "Signup successful! You can now log in.", userId: userId });
                   })
                   .catch((err) => {
                     console.error(err);
@@ -330,5 +330,179 @@ app.get("/status", async(req, res) => {
 
 
 
+// Define schema for user messages
+const messageSchema = new mongoose_app.Schema({
+  userId: String,
+  message: String,
+  timestamp: { type: Date, default: Date.now }
+});
+
+// Create model based on schema
+const Message = mongoose_app.model("Message", messageSchema);
+
+// Route to receive and store user messages
+app.post("/user-message", async (req, res) => {
+  try {
+    const { userId, message } = req.body;
+
+    // Create a new message document
+    const newMessage = new Message({ userId, message });
+
+    // Save the message to the database
+    await newMessage.save();
+
+    // Send response
+    res.status(200).json({ success: true, message: "Message saved successfully" });
+  } catch (error) {
+    console.error("Error saving message:", error);
+    res.status(500).json({ success: false, error: "Error saving message" });
+  }
+});
+
+// Route to retrieve recent chats for a specific user
+app.get("/recent-chats/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find recent messages for the specified user
+    const recentChats = await Message.find({ userId })
+      .select('message timestamp') // Project only the 'message' and 'timestamp' fields
+      .sort({ timestamp: 1 }) // Sort messages by timestamp in ascending order
+      .limit(10); // Limit to the 10 most recent messages
+
+    // Send the recent chats as a response
+    res.status(200).json({ success: true, recentChats });
+  } catch (error) {
+    console.error("Error retrieving recent chats:", error);
+    res.status(500).json({ success: false, error: "Error retrieving recent chats" });
+  }
+});
 
 
+
+//Quiz Progress
+const quizProgressSchema = new mongoose_app.Schema({
+  userId: { type: String, required: true },
+  sectionIndex: { type: Number, required: true },
+  completed: { type: Boolean, default: false },
+});
+
+const QuizProgress = mongoose_app.model('QuizProgress', quizProgressSchema);
+
+// Update quiz progress route
+app.post("/update-quiz-progress", async (req, res) => {
+  try {
+    const { userId, sectionIndex, completed } = req.body;
+
+    // Find existing quiz progress for the user and section
+    let quizProgress = await QuizProgress.findOne({ userId, sectionIndex });
+
+    // If quiz progress doesn't exist, create a new record
+    if (!quizProgress) {
+      quizProgress = new QuizProgress({ userId, sectionIndex, completed });
+    } else {
+      // Update existing quiz progress
+      quizProgress.completed = completed;
+    }
+
+    // Save the updated quiz progress
+    await quizProgress.save();
+
+    // Send success response
+    res.status(200).json({ success: true, message: "Quiz progress updated successfully" });
+  } catch (error) {
+    console.error("Error updating quiz progress:", error);
+    res.status(500).json({ success: false, error: "Error updating quiz progress" });
+  }
+});
+
+// Get quiz progress route
+app.get("/quiz-progress/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find quiz progress for the specified user
+    const quizProgress = await QuizProgress.find({ userId });
+
+    // Send the quiz progress as a response
+    res.status(200).json({ success: true, quizProgress });
+  } catch (error) {
+    console.error("Error retrieving quiz progress:", error);
+    res.status(500).json({ success: false, error: "Error retrieving quiz progress" });
+  }
+});
+
+
+
+//Profile Data
+app.get("/user-details/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find the user details based on userId in the Signup collection
+    const user = await Signup.findOne({ userId });
+
+    if (!user) {
+      // If user not found, send an error response
+      return res.status(404).json({ success: false, error: "User not found" });
+    }
+
+    // Extract Name, Email, and Phone Number from the user object
+    const { name, email, phoneNumber } = user;
+
+    // Send the extracted user details as a response
+    res.status(200).json({ success: true, name, email, phoneNumber });
+  } catch (error) {
+    // Handle errors
+    console.error("Error retrieving user details:", error);
+    res.status(500).json({ success: false, error: "Error retrieving user details" });
+  }
+});
+
+
+
+//clear chat button 
+app.delete("/clear-chat/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    // Delete all documents with the given userId
+    const result = await Message.deleteMany({ userId });
+
+    res.status(200).json({ success: true, message: `Deleted ${result.deletedCount} messages for user ${userId}` });
+  } catch (error) {
+    console.error("Error clearing chat:", error);
+    res.status(500).json({ success: false, error: "Error clearing chat" });
+  }
+});
+
+//Delete whole account :)
+app.delete("/delete-account/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const { password } = req.body;
+
+  try {
+    // Retrieve hashed password from the database
+    const user = await Signup.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({ success: false, error: "User not found" });
+    }
+
+    // Compare the entered password with the hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ success: false, error: "Incorrect password" });
+    }
+
+    // Password matches, delete user account and associated data
+    await Login.deleteOne({ userId });
+    await Signup.deleteOne({ userId });
+    await Message.deleteMany({ userId });
+    await QuizProgress.deleteMany({ userId });
+
+    res.status(200).json({ success: true, message: `Deleted account and associated data for user ${userId}` });
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    res.status(500).json({ success: false, error: "Error deleting account" });
+  }
+});

@@ -3,17 +3,20 @@ import React, { useState, useEffect, useRef  } from 'react';
 import Navbar from '../Navbar/Navbar';
 import  './chatbot.css';
 import Loader from '../../../Loader/Loader';
+import { useUser } from '../../../../UserContext';
 
 
 let messageIdCounter = 0;
 
 const Chatbot = () => {
+  const { userId } = useUser();
   const [isMuted, setIsMuted] = useState(false);
   const [isReadingAloud, setIsReadingAloud] = useState(false);
   const [currentUtterance, setCurrentUtterance] = useState(null);
   const [messageInputValue, setMessageInputValue] = useState('');
   const [loadingGifDisplay, setLoadingGifDisplay] = useState('none');
   const [latestBotMessage, setLatestBotMessage] = useState('');
+  const [recentChats, setRecentChats] = useState([]);
 
   const userMessagesDivRef = useRef(null);
   const chatBoxRef = useRef(null);
@@ -68,6 +71,31 @@ const Chatbot = () => {
     });
   }, [userMessagesDivRef, chatBoxRef]);
 
+  useEffect(() => {
+    // Fetch recent chats when the component mounts
+    fetchRecentChats();
+  }, [userId]); // Fetch again if userId changes
+  
+  const fetchRecentChats = () => {
+    // Fetch recent chats from the server
+    fetch(`http://localhost:5000/recent-chats/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        userMessagesDivRef.current.innerHTML = '';
+        // Extract the message and timestamp fields from each object in the recentChats array
+        data.recentChats.forEach(chat => {
+          const { message, timestamp } = chat;
+          addUserMessage(message, timestamp);
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching recent chats:', error);
+      });
+  };
+  
+
+
+
   const sendMessage = () => {
     let message = messageInputValue.trim();
     setMessageInputValue('');
@@ -93,6 +121,22 @@ const Chatbot = () => {
   
     // Display loading effect
     setLoadingGifDisplay('block');
+
+    fetch('http://localhost:5000/user-message', {    //here we add user-messages to mongodb also
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, message }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Log the response from the server if needed
+    })
+    .catch((error) => {
+      console.error(error);
+      // Handle errors if necessary
+    });
   
     fetch('http://localhost:7000/api', {
       method: 'POST',
@@ -137,7 +181,7 @@ const Chatbot = () => {
   //   return cKeywords.some(keyword => normalizedQuery.includes(keyword));
   // };
 
-  const addUserMessage = (message) => {
+  const addUserMessage = (message, timestamp) => {
     const messageId = messageIdCounter++;
     const maxLength = 10;
   
@@ -154,7 +198,7 @@ const Chatbot = () => {
   
     const messageContent = document.createElement('p');
     messageContent.classList.add('message-content');
-    messageContent.innerHTML = truncatedMessage;
+    messageContent.innerHTML = `${timestamp}: ${truncatedMessage}`;
     messageDiv.appendChild(messageContent);
   
     if (message.length > maxLength) {
@@ -162,7 +206,7 @@ const Chatbot = () => {
       readMoreButton.classList.add('read-more-button');
       readMoreButton.innerHTML = 'Read More';
       // Inline CSS for reducing the size
-      messageContent.style.color = 'red';
+      messageContent.style.color = '#9360e6';
       readMoreButton.style.fontSize = '0.4em'; // Adjust as needed for the desired size
       readMoreButton.style.marginRight = '5px'; // Add margin for spacing
       readMoreButton.style.height = '20px'; // Adjust as needed for the desired height
@@ -174,6 +218,7 @@ const Chatbot = () => {
     userMessagesDivRef.current.appendChild(messageDiv);
     userMessagesDivRef.current.scrollTop = userMessagesDivRef.current.scrollHeight;
   };
+  
   
   
   
@@ -240,9 +285,9 @@ const Chatbot = () => {
     const formattedMessage = message.replace(/\. /g, '.\n\n');
     
     // Apply styling or additional formatting as needed, including hover effect and font size
-    const styledMessage = `<span style="color: #7fff00; cursor: pointer; transition: color 0.8s ease; font-size: 1.1em;"
+    const styledMessage = `<span style="color: #9360e6; cursor: pointer; transition: color 0.8s ease; font-size: 1.1em;"
                            onmouseover="this.style.color='white'; this.style.fontSize='1.2em'"
-                           onmouseout="this.style.color='#7fff00'; this.style.fontSize='1.1em'">
+                           onmouseout="this.style.color='#9360e6'; this.style.fontSize='1.1em'">
                            ${formattedMessage}
                          </span>`;
   
@@ -325,10 +370,12 @@ const clearChatBox = () => {
   const muteButton = document.getElementById('mute-icon');
   const readAloudButton = document.getElementById('read-aloud-icon');
 
+  
+
   return (
     <div className="abcd">
           <div>
-          <p style={{ fontSize: 'larger', color: 'rgba(255, 255, 255, 0.523)', position: 'absolute', left: '0px',
+          <p style={{ fontSize: 'larger', color: '#9360e6', position: 'absolute', left: '0px',
         bottom: '220px',
         }}>Recent Chats</p>
   
@@ -339,6 +386,7 @@ const clearChatBox = () => {
           </div>
       <Navbar/>
       <div>
+      <p className='user-id-chatbot'>User ID: {userId}</p>
       <div id="black_board"></div>
       <div className="container mt-5">
         <h1 style={{ color: 'white' }}>ScriptSage Blackboard</h1>
@@ -377,7 +425,7 @@ const clearChatBox = () => {
             <button type="button" className="mic-button-slash" id="mic-slash-icon" >
               <i className="fa-solid fa-microphone-slash"></i>
             </button>
-
+            
             <button
                 type="button"
                 className="read-aloud-button"
@@ -390,7 +438,7 @@ const clearChatBox = () => {
             <button type="button" className="mute-button" id="mute-icon" onClick={muteToggle}>
               <i className="fa-solid fa-volume-xmark"></i>
             </button>
-
+            
           </div>
         </div>
       </div>

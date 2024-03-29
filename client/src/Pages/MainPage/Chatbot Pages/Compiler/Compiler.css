@@ -1,8 +1,8 @@
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    /* background-color: #151723; */
+.outer-container h1{
+ position: relative;
+ top: 50px;
 }
+
 
 .code-section textarea {
     width: 100%;
@@ -22,10 +22,17 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #283142;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
+.compiler-container label{
+    color: #9360e6;
+}
 
 .status-bar p {
     margin-top: 20px;
@@ -33,13 +40,13 @@ body {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #000  ;
+    background-color: #283142  ;
 }
 
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #895EE6;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -47,4 +54,11 @@ button {
   
 button:hover {
     background-color: #0056b3;
+}
+
+
+.user-id-compiler{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
 }

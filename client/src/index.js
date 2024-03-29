@@ -12,6 +12,7 @@ import Quiz from './Pages/MainPage/Chatbot Pages/Quiz/Quiz';
 import Settings from './Pages/MainPage/Chatbot Pages/Settings/Settings';
 import Tutorials from './Pages/MainPage/Chatbot Pages/Tutorial/Tutorials';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
+import { UserProvider } from './UserContext';
 
 function Index() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
@@ -33,6 +34,7 @@ function Index() {
   return (
     <React.StrictMode>
       <BrowserRouter>
+     < UserProvider>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/loginpage" element={<Login handleLoginStatus={handleLoginStatus} />} />
@@ -91,6 +93,7 @@ function Index() {
             }
           />
         </Routes>
+        </UserProvider>
       </BrowserRouter>
     </React.StrictMode>
   );

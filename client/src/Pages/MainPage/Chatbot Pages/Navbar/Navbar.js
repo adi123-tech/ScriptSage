@@ -1,5 +1,3 @@
-// Navbar.js
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
@@ -21,39 +19,47 @@ export default function Navbar() {
     settings: {
       backgroundColor: '#9c27b0',
     },
+    logout: {
+      color: 'red'
+    }
   };
 
   return (
     <div className="nav1">
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/chatbot" style={navLinkStyles.chatbot}>
-            Chatbot
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/compiler" style={navLinkStyles.compiler}>
-            Compiler
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/quiz" style={navLinkStyles.quiz}>
-            Quiz
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/tutorials" style={navLinkStyles.tutorials}>
-            Tutorials
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/settings" style={navLinkStyles.settings}>
-            Settings
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/chatbot" style={navLinkStyles.chatbot}>
+              Chatbot
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/compiler" style={navLinkStyles.compiler}>
+              Compiler
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/quiz" style={navLinkStyles.quiz}>
+              Quiz
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/tutorials" style={navLinkStyles.tutorials}>
+              Tutorials
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/settings" style={navLinkStyles.settings}>
+              Settings
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/" style={navLinkStyles.logout}>
+              logout
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }

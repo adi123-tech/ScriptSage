@@ -4,10 +4,12 @@ import axios from 'axios';
 import "./login.css";
 import { useNavigate } from 'react-router-dom';
 import { validateEmail, validatePassword ,validateIndianPhoneNumber } from './validationUtils';
+import { useUser } from '../../UserContext';
 
 
 
 function Login({ handleLoginStatus }) {
+  const { setUserId } = useUser(); 
   const navigate = useNavigate();
   const [otpInputs, setOtpInputs] = useState(Array(4).fill(''));
   const sendOtpButtonRef = useRef(null);
@@ -242,9 +244,9 @@ const errorStyle = {
   
         if (data.success) {
           // Redirect to the home page
+          setUserId(data.userId);
           handleLoginStatus(true);
           navigate('/chatbot');
-          
         } else {
           // Handle other responses or errors
           console.error(data.message);
@@ -279,19 +281,24 @@ const errorStyle = {
     })
       .then(response => response.text())
       .then(data => {
-        console.log(data);
-  
-        // Check if the response contains "Signup successful"
-        if (data.includes("Signup successful")) {
-          handleLoginStatus(true);
-          navigate('/chatbot');
-          // Redirect to the login page or any other page as needed
-        } else {
-          // Handle other responses (e.g., show an error message)
-          console.error(data);
+        try {
+          const responseData = JSON.parse(data);
+          console.log("Response from server:", responseData);
+          console.log("Type of data:", typeof responseData);
+          if (responseData.success) {
+            // Redirect to the home page
+            handleLoginStatus(true);
+            navigate('/chatbot', { state: { userId2: responseData.userId } });
+          } else {
+            // Handle other responses or errors
+            console.error(responseData.message);
+            setLoginError(true);
+          }
+        } catch (error) {
+          console.error("Error parsing response data:", error);
           setLoginError(true);
         }
-      })
+      })      
       .catch(error => {
         console.error('Error during signup:', error);
         setLoginError(true);

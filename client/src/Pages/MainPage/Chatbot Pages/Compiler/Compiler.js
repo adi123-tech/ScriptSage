@@ -3,9 +3,11 @@ import Navbar from '../Navbar/Navbar';
 import { useState } from 'react';
 import './Compiler.css';
 import axios from 'axios';
+import { useUser } from '../../../../UserContext';
+
 
 function Compiler() {
-
+  const { userId } = useUser();
   const [code, setCode] = useState(''); 
   const [language, setLanguage] = useState("c");
   const [output, setOutput] = useState("");
@@ -63,7 +65,8 @@ function Compiler() {
 
   return (
     <>
-      <div style={{color: "black"}}>
+    <p className='user-id-compiler'>User ID: {userId}</p>
+      <div className='outer-container'>
         <Navbar/>
         <h1>Compiler</h1><br/>
         <div className='compiler-container'>
@@ -84,12 +87,12 @@ function Compiler() {
         </div>
         <br/>
         <div className='code-section'>
-          <textarea rows={20} cols={75} value={code} onChange={(e) => {setCode(e.target.value)}} style={{color: "black", backgroundColor: "#f8f8f8"}}>
+          <textarea rows={20} cols={75} value={code} onChange={(e) => {setCode(e.target.value)}} style={{color: "white", backgroundColor: "#283142"}}>
           </textarea>
         </div>
         <br></br>
         <button onClick={handleSubmit}>Submit</button>
-        <div className='status-bar'  style={{color: "black"}}>
+        <div className='status-bar'  style={{color: "white"}}>
         {/* <p>
           { statusbar }
         </p> */}

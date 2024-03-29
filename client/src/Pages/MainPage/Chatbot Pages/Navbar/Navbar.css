@@ -68,3 +68,13 @@ NavLink:hover {
   background-color: #555;
   color: #fff;
 }
+
+.para-parent{
+  z-index: 50;
+  position: absolute;
+  top: 650px;
+}
+
+.para{
+  height: 20px;
+}

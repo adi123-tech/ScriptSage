@@ -1,14 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Quizlogo from './Quizlogo';
 import './quiz.css';
+import { useUser } from '../../../../UserContext';
+import axios from 'axios';
 
 function Quiz() {
+  const { userId } = useUser();
   const [currentSection, setCurrentSection] = useState(null);
   const [quizResult, setQuizResult] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [sectionCompleted, setSectionCompleted] = useState(new Array(5).fill(false));
   const [sectionInitiallyWrong, setSectionInitiallyWrong] = useState(new Array(5).fill(true));
+
+  useEffect(() => {
+    // Define an async function to fetch quiz progress
+    const fetchQuizProgress = async () => {
+      try {
+        const response = await axios.get(`/quiz-progress/${userId}`);
+        const { success, quizProgress } = response.data;
+        if (success) {
+          // Update sectionCompleted based on fetched quiz progress
+          const updatedSectionCompleted = new Array(5).fill(false);
+          quizProgress.forEach((progress) => {
+            updatedSectionCompleted[progress.sectionIndex] = progress.completed;
+          });
+          setSectionCompleted(updatedSectionCompleted);
+        }
+      } catch (error) {
+        console.error('Error fetching quiz progress:', error);
+      }
+    };
+
+    // Call the fetchQuizProgress function
+    fetchQuizProgress();
+  }, [userId]);
+
+  const updateQuizProgress = async (sectionIndex, completed) => {
+    try {
+      await axios.post('/update-quiz-progress', { userId, sectionIndex, completed });
+    } catch (error) {
+      console.error('Error updating quiz progress:', error);
+    }
+  };
+
 
   const sections = [
     {
@@ -173,31 +208,34 @@ function Quiz() {
     }
   };
 
-  const finishQuiz = () => {
+  const finishQuiz = async () => {
     // Calculate quiz result for the current section
     const questions = sections[currentSection].questions;
     const totalQuestions = questions.length;
     let correctAnswers = 0;
-
+  
     questions.forEach((question, index) => {
       if (question.correctAnswer === selectedAnswers[index]) {
         correctAnswers++;
       }
     });
-
+  
     setQuizResult({
       totalQuestions,
       correctAnswers
     });
-
+  
     if (correctAnswers >= 4) {
       setSectionCompleted((prev) => {
         const updated = [...prev];
         updated[currentSection] = true;
         return updated;
       });
+  
+      // Update quiz progress in the backend
+      await updateQuizProgress(currentSection, true);
     }
-
+  
     if (correctAnswers === 0 && quizResult && quizResult.totalQuestions > 0) {
       setSectionInitiallyWrong((prev) => {
         const updated = [...prev];
@@ -206,6 +244,7 @@ function Quiz() {
       });
     }
   };
+  
 
   const handleOptionSelect = (index, option) => {
     const updatedSelectedAnswers = [...selectedAnswers];
@@ -294,7 +333,8 @@ function Quiz() {
   };
 
   return (
-    
+    <>
+    <p className='user-id-quiz'>User ID: {userId}</p>
     <div className='quiz-container'>
       <Navbar />
       <Quizlogo/>
@@ -318,6 +358,7 @@ function Quiz() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
