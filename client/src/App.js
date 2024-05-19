@@ -48,11 +48,11 @@ function App() {
       </div>
 
       <div id="Image1">
-        <img src="/vecteezy_abstract-3d-human-head-made-of-colorful-paint-splashes_23176611.jpg" alt="Robo Image" />
+        <img src="/vecteezy_abstract-3d-human-head-made-of-colorful-paint-splashes_23176611.png" alt="Robo Image" />
       </div>
 
       <div id="PoweredBY">
-        <p>Powered by GPT AI</p>
+        <p>Powered by Gemini AI</p>
       </div>
 
       <div id="maintext">

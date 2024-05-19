@@ -3,59 +3,38 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 export default function Navbar() {
-  const navLinkStyles = {
-    chatbot: {
-      backgroundColor: '#4CAF50',
-    },
-    compiler: {
-      backgroundColor: '#2196F3',
-    },
-    quiz: {
-      backgroundColor: '#f44336',
-    },
-    tutorials: {
-      backgroundColor: '#FFC107',
-    },
-    settings: {
-      backgroundColor: '#9c27b0',
-    },
-    logout: {
-      color: 'red'
-    }
-  };
-
   return (
-    <div className="nav1">
+    <div className="navbar-container">
       <nav>
-        <ul>
+        <ul className="navbar-list">
           <li>
-            <NavLink to="/chatbot" style={navLinkStyles.chatbot}>
+            <NavLink to="/chatbot" className="navbar-link chatbot">
               Chatbot
             </NavLink>
           </li>
           <li>
-            <NavLink to="/compiler" style={navLinkStyles.compiler}>
+            <NavLink to="/compiler" className="navbar-link compiler">
               Compiler
             </NavLink>
           </li>
           <li>
-            <NavLink to="/quiz" style={navLinkStyles.quiz}>
+            <NavLink to="/quiz" className="navbar-link quiz">
               Quiz
             </NavLink>
           </li>
           <li>
-            <NavLink to="/tutorials" style={navLinkStyles.tutorials}>
+            <NavLink to="/tutorials" className="navbar-link tutorials">
               Tutorials
             </NavLink>
           </li>
           <li>
-            <NavLink to="/settings" style={navLinkStyles.settings}>
+            <NavLink to="/settings" className="navbar-link settings">
               Settings
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" style={navLinkStyles.logout}>
-              logout
+            <NavLink to="/" className="navbar-link logout">
+              Logout
             </NavLink>
           </li>
         </ul>

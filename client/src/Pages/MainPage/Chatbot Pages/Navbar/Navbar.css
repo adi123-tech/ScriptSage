@@ -1,7 +1,4 @@
-/* Navbar.css */
-
-.nav1 nav {
-  background-color: #333;
+.navbar-container {
   padding: 10px;
   position: fixed;
   width: 100%;
@@ -10,7 +7,7 @@
   z-index: 1000;
 }
 
-ul {
+.navbar-list {
   list-style: none;
   display: flex;
   justify-content: space-around;
@@ -18,63 +15,29 @@ ul {
   padding: 0;
 }
 
-li {
-  margin: 0;
-}
-
-NavLink {
+.navbar-link {
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 16px;
   padding: 10px;
-  transition: color 0.3s ease;
-}
-
-NavLink:hover {
-  color: #61dafb;
-}
-
-/* Separate styling for each button */
-li:nth-child(1) NavLink {
-  background-color: #4CAF50;
-}
-
-li:nth-child(2) NavLink {
-  background-color: #2196F3;
-}
-
-li:nth-child(3) NavLink {
-  background-color: #f44336;
-}
-
-li:nth-child(4) NavLink {
-  background-color: #FFC107;
-}
-
-li:nth-child(5) NavLink {
-  background-color: #9c27b0;
-}
-
-/* Additional styling for buttons */
-NavLink {
-  border: 1px solid #fff;
   border-radius: 5px;
-  margin: 0 5px;
-  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex: 1; /* Make all buttons equal width by distributing available space equally */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
-NavLink:hover {
+.navbar-link:hover {
   background-color: #555;
-  color: #fff;
 }
 
-.para-parent{
-  z-index: 50;
-  position: absolute;
-  top: 650px;
+/* Individual button styles */
+.chatbot,
+.compiler,
+.quiz,
+.tutorials,
+.settings,
+.logout {
+  background-color: #7F18D8; /* Set background color for all buttons */
 }
 
-.para{
-  height: 20px;
-}

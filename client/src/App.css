@@ -8,43 +8,62 @@
       font-family: 'Inter', sans-serif;
     }
     
-    body{
-      color: white;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #151723;
+   body {
+        background-image: url('../public/main-background.png');
+        background-size: cover;
+        color: white;
+        font-family: 'Inter', sans-serif;
+    }
+
+      
+      
+
+    .nav2 nav {
+        color: white;
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        top: 50px;
+        right: 330px;
     }
     
-
-  .nav2 nav {
-      color: white;
-      padding: 10px;
-      text-align: center;
-      position: absolute;
-      top: 50px;
-      right: 330px;
-      background-color: #151723;
-  }
-
-  .nav2 nav a {
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      margin: 0 5px;
-      transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition property for smooth scaling and font size change */
-  }
-  
-  .nav2 a:hover {
-      font-size: 2em; /* Increase font size by a factor of 2 on hover */
-      transform: scale(1.1); /* Increase the scale on hover */
-  }
-  
-  .nav2 a:not(:hover) {
-      transform: scale(1); /* Set the default scale for non-hovered state */
-      font-size: 1em; /* Set the default font size for non-hovered state */
-  }
-  
+    .nav2 nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        margin: 0 5px;
+        position: relative; /* Position relative to allow absolute positioning of the underline */
+        transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Added transition property for smooth scaling and font size change */
+    }
+    
+    /* Underline style */
+    .nav2 nav a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px; /* Adjust the distance of the underline from the text */
+        width: 100%; /* Full width of the anchor tag */
+        height: 2px; /* Thickness of the underline */
+        background-color: white; /* Color of the underline */
+        transition: width 0.3s ease-in-out; /* Transition width for smooth scaling */
+    }
+    
+    /* Hover state */
+    .nav2 nav a:hover {
+        font-size: 2em; /* Increase font size by a factor of 2 on hover */
+        transform: scale(1.1); /* Increase the scale on hover */
+    }
+    
+    .nav2 nav a:hover::after {
+        width: 50%; /* Increase the width of the underline on hover */
+    }
+    
+    /* Default state */
+    .nav2 nav a:not(:hover)::after {
+        width: 100%; /* Set the default width for non-hovered state */
+    }
+    
+    
   
   
    #Login 
@@ -200,7 +219,7 @@
   #subtext
   {
       text-align: left;
-      font-size: 1rem;
+      font-size: 1.3rem;
       width: 400px;
       display: inline-block;
       position: absolute;

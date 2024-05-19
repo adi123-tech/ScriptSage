@@ -71,72 +71,81 @@ const Chatbot = () => {
     });
   }, [userMessagesDivRef, chatBoxRef]);
 
-  useEffect(() => {
-    // Fetch recent chats when the component mounts
-    fetchRecentChats();
-  }, [userId]); // Fetch again if userId changes
-  
-  const fetchRecentChats = () => {
-    // Fetch recent chats from the server
-    fetch(`http://localhost:5000/recent-chats/${userId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        userMessagesDivRef.current.innerHTML = '';
-        // Extract the message and timestamp fields from each object in the recentChats array
-        data.recentChats.forEach(chat => {
-          const { message, timestamp } = chat;
-          addUserMessage(message, timestamp);
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching recent chats:', error);
+const [messagesLoaded, setMessagesLoaded] = useState(false);
+
+useEffect(() => {
+  // Fetch recent chats when the component mounts
+  fetchRecentChats();
+}, [userId]); // Fetch again if userId changes
+
+const fetchRecentChats = () => {
+  // Fetch recent chats from the server
+  fetch(`http://localhost:5000/recent-chats/${userId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      userMessagesDivRef.current.innerHTML = '';
+      // Extract the message and timestamp fields from each object in the recentChats array
+      data.recentChats.forEach(chat => {
+        const { message, timestamp } = chat;
+        addUserMessage(message, timestamp);
+        setMessagesLoaded(true);
       });
-  };
+      // Set messagesLoaded to true after fetching chats
+      
+    })
+    .catch((error) => {
+      console.error('Error fetching recent chats:', error);
+    });
+};
   
+ 
 
 
+  const sendMessage = (inputMessage) => {
+    let message = typeof inputMessage === 'string' ? inputMessage.trim() : messageInputValue.trim();
+  setMessageInputValue('');
 
-  const sendMessage = () => {
-    let message = messageInputValue.trim();
-    setMessageInputValue('');
   
     // Greeting recognition logic
     const greetings = ['hello', 'hi', 'hey', 'greetings'];
     const normalizedMessage = message.toLowerCase();
   
     if (greetings.some(greeting => normalizedMessage.includes(greeting))) {
-      addBotMessage("Hello! 😊 ScriptSage at your service....");
-      return;
-    }
-    // Check for queries about the bot's name
-    if (normalizedMessage.includes('what\'s your name') || normalizedMessage.includes('your name')) {
-      addBotMessage("My name is ScriptSage 🤖");
+      addBotMessage({ response: "Hello! 😊 ScriptSage at your service...." });
       return;
     }
   
-    // Automatically append 'in C programming language' to the message
-    message += ' in C programming language';
+    // Check for queries about the bot's name
+    if (normalizedMessage.includes('what\'s your name') || normalizedMessage.includes('your name')) {
+      addBotMessage({ response: "My name is ScriptSage 🤖" });
+      return;
+    }
+  
+    // Automatically append 'in C programming language' to the message if it is not a pre-defined topic message
+    if (!inputMessage) {
+      message += ' in C programming language';
+    }
   
     addUserMessage(message);
   
     // Display loading effect
     setLoadingGifDisplay('block');
-
-    fetch('http://localhost:5000/user-message', {    //here we add user-messages to mongodb also
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId, message }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data); // Log the response from the server if needed
+  
+    fetch('http://localhost:5000/user-message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, message }),
     })
-    .catch((error) => {
-      console.error(error);
-      // Handle errors if necessary
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Log the response from the server if needed
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle errors if necessary
+      });
   
     fetch('http://localhost:7000/api', {
       method: 'POST',
@@ -145,79 +154,73 @@ const Chatbot = () => {
       },
       body: JSON.stringify({ message }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        const content = data.content;
-  
-        // Check if the content has a code block
-        const hasCodeBlock = content.includes('```');
-        if (hasCodeBlock) {
-          // If the content has a code block, wrap it in a <pre><code> element
-          const codeContent = content.replace(
-            /```([\s\S]+?)```/g,
-            '</p><pre><code>$1</code></pre><p>'
-          );
-          addBotMessage(codeContent);
-        } else {
-          addBotMessage(content);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-  
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Response from server:', data);
+        if (data && data.response) {
+          addBotMessage(data);
+        } else {
+          addBotMessage({ response: "Failed to generate response from the server." });
+        }
         // Hide loading effect
         setLoadingGifDisplay('none');
       })
       .catch((error) => {
         console.error(error);
+        addBotMessage({ response: "An error occurred while communicating with the server." });
         // Hide loading effect in case of an error
         setLoadingGifDisplay('none');
-        addBotMessage("server not connected lol 😂");
       });
   };
   
-  // const isCRelatedQuery = (query) => {
-  //   // Check if the query is related to C language (you can customize this logic based on your needs)
-  //   const cKeywords = ['C', 'programming', 'code', 'algorithm']; // Example keywords
-  //   const normalizedQuery = query.toLowerCase();
-
-  //   return cKeywords.some(keyword => normalizedQuery.includes(keyword));
-  // };
-
+  
   const addUserMessage = (message, timestamp) => {
     const messageId = messageIdCounter++;
-    const maxLength = 10;
+    const maxLength = 15; // Increased maximum length for better readability
   
+    // Truncate long messages
     const truncatedMessage = truncateText(message, maxLength);
   
+    // Create the user message container
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('user-message');
     messageDiv.dataset.messageId = messageId;
   
+    // Add a new message indicator
     const newMessageIndicator = document.createElement('span');
     newMessageIndicator.classList.add('new-message-indicator');
     newMessageIndicator.innerHTML = '🔔';
     messageDiv.appendChild(newMessageIndicator);
   
+    // Create message content element
     const messageContent = document.createElement('p');
     messageContent.classList.add('message-content');
-    messageContent.innerHTML = `${timestamp}: ${truncatedMessage}`;
+    messageContent.innerHTML = `${timestamp ? timestamp : 'now'}: ${truncatedMessage}`;
     messageDiv.appendChild(messageContent);
-  
+    setMessagesLoaded(true);
+    // Add "Read More" button for long messages
     if (message.length > maxLength) {
       const readMoreButton = document.createElement('button');
       readMoreButton.classList.add('read-more-button');
       readMoreButton.innerHTML = 'Read More';
-      // Inline CSS for reducing the size
-      messageContent.style.color = '#9360e6';
-      readMoreButton.style.fontSize = '0.4em'; // Adjust as needed for the desired size
-      readMoreButton.style.marginRight = '5px'; // Add margin for spacing
-      readMoreButton.style.height = '20px'; // Adjust as needed for the desired height
-      readMoreButton.style.width = '60px';
+      readMoreButton.style.fontSize = '0.8em'; // Adjust as needed for the desired size
+      readMoreButton.style.marginLeft = '5px'; // Add margin for spacing
+      readMoreButton.style.padding = '2px 5px'; // Adjust padding for button size
       readMoreButton.addEventListener('click', () => toggleMessage(messageId, message));
       messageDiv.appendChild(readMoreButton);
     }
   
+    // Append the message container to the user messages div
     userMessagesDivRef.current.appendChild(messageDiv);
+    // Scroll to the bottom to show the latest message
     userMessagesDivRef.current.scrollTop = userMessagesDivRef.current.scrollHeight;
   };
+  
   
   
   
@@ -232,8 +235,15 @@ const Chatbot = () => {
     if (messageDiv) {
       const messageContent = messageDiv.querySelector('.message-content');
       messageContent.innerHTML = fullMessage;
+  
+      // Remove the "Read More" button
+      const readMoreButton = messageDiv.querySelector('.read-more-button');
+      if (readMoreButton) {
+        readMoreButton.remove();
+      }
     }
   };
+  
   
   
   
@@ -249,7 +259,7 @@ const Chatbot = () => {
 
   
 
-  const addBotMessage = (message) => {
+  const addBotMessage = (data) => {
     // Clear previous bot messages
     chatBoxRef.current.innerHTML = '';
   
@@ -262,37 +272,34 @@ const Chatbot = () => {
     botIcon.classList.add('bot-icon');
     messageDiv.appendChild(botIcon);
   
-    // Create a paragraph element for the message content
-    const messageContent = document.createElement('p');
+    // Create a div element for the message content
+    const messageContent = document.createElement('div');
     messageContent.classList.add('bot-message-content');
-    messageContent.style.color = 'white';
-    messageContent.style.fontSize = '1.2rem';
-    messageContent.innerHTML = beautifyMessage(message);
+    messageContent.innerHTML = beautifyMessage(data.response); // Assuming the response is in 'data.response'
     messageDiv.appendChild(messageContent);
   
     // Append the message div to the chat box
     chatBoxRef.current.appendChild(messageDiv);
   
     // Set the latest bot message
-    setLatestBotMessage(message);
+    setLatestBotMessage(data.response);
   
     // Scroll to the top of the chat box
     chatBoxRef.current.scrollTop = 0;
   };
   
   const beautifyMessage = (message) => {
-    // Add line breaks before each sentence
-    const formattedMessage = message.replace(/\. /g, '.\n\n');
-    
-    // Apply styling or additional formatting as needed, including hover effect and font size
-    const styledMessage = `<span style="color: #9360e6; cursor: pointer; transition: color 0.8s ease; font-size: 1.1em;"
-                           onmouseover="this.style.color='white'; this.style.fontSize='1.2em'"
-                           onmouseout="this.style.color='#9360e6'; this.style.fontSize='1.1em'">
-                           ${formattedMessage}
-                         </span>`;
+    // Handle code blocks
+    const formattedMessage = message
+      .replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>') // Replace triple backticks with <pre><code>
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')       // Replace **bold** with <strong>
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')                   // Replace *italic* with <em>
+      .replace(/\n/g, '<br>');                                // Replace newlines with <br>
   
-    return styledMessage;
-};
+    // Return the styled message
+    return `<div style="color: white; font-size: 1rem">${formattedMessage}</div>`;
+  };
+  
 
   
   
@@ -375,17 +382,37 @@ const clearChatBox = () => {
   return (
     <div className="abcd">
           <div>
-          <p style={{ fontSize: 'larger', color: '#9360e6', position: 'absolute', left: '0px',
-        bottom: '220px',
-        }}>Recent Chats</p>
-  
-
             <div className="user-messages" ref={userMessagesDivRef}>
               {/* User messages will be added here dynamically */}
             </div>
+            {!messagesLoaded && (
+              <img src="/nohistory.png" alt="No messages" className="no-messages-image"/>
+          )}
           </div>
       <Navbar/>
       <div>
+       <div className='trending-searches'>
+        <div className="topic-buttons">
+          <button onClick={() => sendMessage('Basics of C')}>Basics of C</button>
+          <button onClick={() => sendMessage('Functions in C')}>Functions</button>
+          <button onClick={() => sendMessage('Pointers in C')}>Pointers</button>
+          <button onClick={() => sendMessage('Arrays in C')}>Arrays</button>
+          <button onClick={() => sendMessage('Linked List in C')}>Linked List</button>
+          <button onClick={() => sendMessage('Structures in C')}>Structures</button>
+          <button onClick={() => sendMessage('Unions in C')}>Unions</button>
+          <button onClick={() => sendMessage('File I/O in C')}>File I/O</button>
+          <button onClick={() => sendMessage('Dynamic Memory Allocation in C')}>Dynamic Memory Allocation</button>
+          <button onClick={() => sendMessage('Bit Manipulation in C')}>Bit Manipulation</button>
+          <button onClick={() => sendMessage('Command Line Arguments in C')}>Command Line Arguments</button>
+          <button onClick={() => sendMessage('Data Types in C')}>Data Types</button>
+          <button onClick={() => sendMessage('Operators in C')}>Operators</button>
+          <button onClick={() => sendMessage('Control Flow in C')}>Control Flow</button>
+          <button onClick={() => sendMessage('Loops in C')}>Loops</button>
+          <button onClick={() => sendMessage('Recursion in C')}>Recursion</button>
+          <button onClick={() => sendMessage('String Manipulation in C')}>String Manipulation</button>
+          <button onClick={() => sendMessage('Error Handling in C')}>Error Handling</button>
+        </div>
+     </div>
       <p className='user-id-chatbot'>User ID: {userId}</p>
       <div id="black_board"></div>
       <div className="container mt-5">

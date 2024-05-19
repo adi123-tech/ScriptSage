@@ -368,7 +368,7 @@ app.get("/recent-chats/:userId", async (req, res) => {
     const recentChats = await Message.find({ userId })
       .select('message timestamp') // Project only the 'message' and 'timestamp' fields
       .sort({ timestamp: 1 }) // Sort messages by timestamp in ascending order
-      .limit(10); // Limit to the 10 most recent messages
+      .limit(10000); // Limit to the 10 most recent messages
 
     // Send the recent chats as a response
     res.status(200).json({ success: true, recentChats });
