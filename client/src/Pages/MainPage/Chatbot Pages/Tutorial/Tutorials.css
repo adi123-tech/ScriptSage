@@ -1,102 +1,136 @@
 /* Main container */
 .tutorials-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 40 px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
-    max-height: 80vh; /* Limit container height to 80% of the viewport height */
-    display: flex;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #283142; /* Background color */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  max-height: 80vh; /* Limit container height to 80% of the viewport height */
+  display: flex;
+  position: fixed;
+  top: 11%;
+  left: 10%;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #434343 #f8f9fa;
+  }
+
+  .tutorials-container::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
   }
   
-  .menubar {
-    position: fixed;
-    padding: 5rem;
-    width: 200px; /* Adjust as needed */
-    background-color: #f4f4f4;
-    border-left: 1px solid #ccc;
-    padding: 20px;
+  .tutorials-container::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
   }
   
-  .menu-button {
-    display: block;
-    width: 100%;
-    padding: 0.75rem 1rem; /* Adjust padding */
-    background-color: #fff;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Add smooth transition effect */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+  .tutorials-container::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
   }
-  
-  .menu-button:hover {
-    background-color: #f0f0f0; /* Change background color on hover */
-  }
-  
-  .menu-button p {
-    margin: 0;
-    font-size: 16px;
-    color: #333; /* Black color for text */
-    text-align: center;
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
-    white-space: nowrap; /* Prevent text from wrapping */
-  }
-  
-  .content {
-    margin-left: 220px; /* Adjust to accommodate the menu width */
-    padding: 20px;
-  }
-  
-  .tutorials-container .content {
-    margin-left: 220px; /* Adjust to accommodate the menu width */
-    padding: 20px;
-  }
-  
-  /* Headings */
-  .tutorials-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 36px;
-    color: #000; /* Black color */
-    font-weight: bold; /* Make the heading bold */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow */
-  }
-  
-  .tutorials-container h2 {
-    margin-bottom: 15px;
-    padding: 10px; /* Add padding to the heading boxes */
-    background-color: #f0f0f0; /* Background color for the heading boxes */
-    border-radius: 5px; /* Add rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
-    font-size: 24px;
-    color: #333; /* Black color */
-  }
-  
-  /* Paragraphs */
-  .tutorials-container p {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #555; /* Dark gray color for text */
-  }
-  
-  /* Lists */
-  .tutorials-container ul {
-    list-style-type: disc;
-    padding-left: 20px;
-  }
-  
-  .tutorials-container li {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #000; /* Black color */
-  }
-  
-  /* Navbar Styles */
-  /* Add styles for Navbar component here */
-  
+
+/* Menubar */
+.menubar {
+  position: fixed;
+  padding: 5rem;
+  width: 200px; /* Adjust as needed */
+  /* background-color: #7F18D8;  */
+  border-left: 1px solid #ccc;
+  padding: 20px;
+}
+
+/* Menu button */
+.menu-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem; /* Adjust padding */
+  background-color: #56299e;/* Background color */
+  border: none;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add smooth transition effect */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+  transition: transform 0.3s;
+  margin-bottom: 20px;
+}
+
+.menu-button:hover {
+  background-color: #7a4db1;
+  transform: scale(1.05);
+}
+
+.menu-button p {
+  margin: 0;
+  font-size: 16px;
+  color: white; /* Text color */
+  text-align: center;
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Content */
+.content {
+  margin-left: 220px; /* Adjust to accommodate the menu width */
+  padding: 20px;
+  color: white; /* Text color */
+}
+
+.tutorials-container .content {
+  margin-left: 220px; /* Adjust to accommodate the menu width */
+  padding: 20px;
+  color: white; /* Text color */
+  border-radius: 5px;
+}
+
+/* Headings */
+.tutorials-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 36px;
+  color: white; /* Text color */
+  font-weight: bold; /* Make the heading bold */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow */
+}
+
+.tutorials-container h2 {
+  margin-bottom: 15px;
+  padding: 10px; /* Add padding to the heading boxes */
+  background-color: #7F18D8; /* Background color */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  font-size: 24px;
+  color: white; /* Text color */
+}
+
+/* Paragraphs */
+.tutorials-container p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: white; /* Text color */
+}
+
+/* Lists */
+.tutorials-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.tutorials-container li {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: white; /* Text color */
+}
+
+/* Navbar Styles */
+/* Add styles for Navbar component here */
+
+
+.user-id-quiz{
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}

@@ -4,35 +4,93 @@
 .user-id-settings {
   position: absolute;
   bottom: 10px;
-  right: 10px; /* Adjusted for better alignment */
+  right: 5px;/* Adjusted for better alignment */
 }
+
+.settings-container .settings-img {
+  position: relative;
+  bottom: 20px;
+  width: 20%;
+  animation: rotate 4s linear infinite; /* Adjust the animation duration and timing function as needed */
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 /* Settings container */
 .settings-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px; /* Added padding for better spacing */
+  padding: 50px 50px 50px 50px; /* Added padding for better spacing */
+  background-color: #283142;
+  border-radius: 10px;
+  margin-top: 60px;
 }
 
 /* Settings buttons */
 .settings-buttons {
   display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  margin-bottom: 20px;
+  justify-content: space-around;
+  gap: 20px;
+  color: white;
 }
 
-/* Individual settings button */
-.settings-button {
-  margin: 0 10px; /* Adjusted spacing */
-  padding: 10px 20px; /* Adjusted padding */
-  font-size: 16px; /* Adjusted font size */
+
+
+.circle-button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #283142;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #663D8A;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.circle-button:hover {
+  background-color: #283142;
+  transform: scale(1.05);
+}
+
+
+.circle-button img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.circle-button .profile-name {
+  margin: 0;
+  font-size: 14px;
+  color: #283142;
+  text-align: center;
+}
+
+.delete-button {
+  color: #ff1121;
+  font-size: 12px;
+  background-color: #283142;
+}
+
+
 
 /* Profile section */
 .profile-section {
   width: 300px; /* Adjusted width for better content fit */
-  background-color: #283142;
+  background-color: #171c25;
   padding: 20px;
   border-radius: 10px;
   position: relative; /* Changed to relative for easier positioning */
@@ -50,7 +108,7 @@
 
 /* Profile info */
 .profile-info {
-  text-align: center;
+  text-align: left;
 }
 
 /* Profile image */
@@ -67,3 +125,5 @@
   margin: 5px 0; /* Adjusted paragraph margins */
   color: #895EE6; /* Changed text color to white */
 }
+
+

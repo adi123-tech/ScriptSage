@@ -34,65 +34,65 @@ function Index() {
   return (
     <React.StrictMode>
       <BrowserRouter>
-     < UserProvider>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/loginpage" element={<Login handleLoginStatus={handleLoginStatus} />} />
-          <Route path="/forgotpage" element={<Forgot />} />
-          <Route path="/not_found_page" element={<NotFoundPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          {/* PrivateRoute logic inline */}
-          <Route
-            path="/chatbot"
-            element={
-              isLoggedIn ? (
-                <Chatbot />
-              ) : (
-                <Navigate to={{ pathname: '/not_found_page', state: { from: '/chatbot' } }} />
-              )
-            }
-          />
-          <Route
-            path="/compiler"
-            element={
-              isLoggedIn ? (
-                <Compiler />
-              ) : (
-                <Navigate to={{ pathname: '/not_found_page', state: { from: '/compiler' } }} />
-              )
-            }
-          />
-          <Route
-            path="/quiz"
-            element={
-              isLoggedIn ? (
-                <Quiz />
-              ) : (
-                <Navigate to={{ pathname: '/not_found_page', state: { from: '/quiz' } }} />
-              )
-            }
-          />
-          <Route
-            path="/tutorials"
-            element={
-              isLoggedIn ? (
-                <Tutorials />
-              ) : (
-                <Navigate to={{ pathname: '/not_found_page', state: { from: '/tutorials' } }} />
-              )
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              isLoggedIn ? (
-                <Settings />
-              ) : (
-                <Navigate to={{ pathname: '/not_found_page', state: { from: '/settings' } }} />
-              )
-            }
-          />
-        </Routes>
+        <UserProvider>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/loginpage" element={<Login handleLoginStatus={handleLoginStatus} />} />
+            <Route path="/forgotpage" element={<Forgot />} />
+            <Route path="/not_found_page" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+            {/* PrivateRoute logic inline */}
+            <Route
+              path="/chatbot"
+              element={
+                isLoggedIn ? (
+                  <Chatbot />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/chatbot' } }} />
+                )
+              }
+            />
+            <Route
+              path="/compiler"
+              element={
+                isLoggedIn ? (
+                  <Compiler />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/compiler' } }} />
+                )
+              }
+            />
+            <Route
+              path="/quiz"
+              element={
+                isLoggedIn ? (
+                  <Quiz />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/quiz' } }} />
+                )
+              }
+            />
+            <Route
+              path="/tutorials"
+              element={
+                isLoggedIn ? (
+                  <Tutorials />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/tutorials' } }} />
+                )
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                isLoggedIn ? (
+                  <Settings />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/settings' } }} />
+                )
+              }
+            />
+          </Routes>
         </UserProvider>
       </BrowserRouter>
     </React.StrictMode>

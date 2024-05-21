@@ -47,31 +47,30 @@ function Settings() {
   };
 
   // Function to handle account deletion
-const handleDeleteAccount = async () => {
-  const password = prompt('Please enter your password to confirm account deletion:');
-  if (password) {
-    try {
-      // Make HTTP request to delete the user account with password verification
-      await axios.delete(`/delete-account/${userId}`, { data: { password } });
-      console.log('Account deleted!');
-      navigate('/');
-      // Optionally, you can redirect the user or show a success message here
-    } catch (error) {
-      console.error('Error deleting account:', error);
-      // Display an alert if the password is incorrect
-      if (error.response && error.response.status === 401) {
-        alert('Incorrect password. Please try again.');
-      } else {
-        // Optionally, you can update the UI or show an error message here for other types of errors
+  const handleDeleteAccount = async () => {
+    const password = prompt('Please enter your password to confirm account deletion:');
+    if (password) {
+      try {
+        // Make HTTP request to delete the user account with password verification
+        await axios.delete(`/delete-account/${userId}`, { data: { password } });
+        console.log('Account deleted!');
+        navigate('/');
+        // Optionally, you can redirect the user or show a success message here
+      } catch (error) {
+        console.error('Error deleting account:', error);
+        // Display an alert if the password is incorrect
+        if (error.response && error.response.status === 401) {
+          alert('Incorrect password. Please try again.');
+        } else {
+          // Optionally, you can update the UI or show an error message here for other types of errors
+        }
       }
     }
-  }
-};
-
+  };
 
   // Render loading state while user data is being fetched
   if (!userData) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   // Destructure user data
@@ -80,26 +79,28 @@ const handleDeleteAccount = async () => {
   return (
     <div className="settings-container">
       <Navbar />
+      <img className='settings-img' src="/settings.png" alt="" />
       <p className='user-id-settings'>User ID: {userId}</p>
       <div className="settings-buttons">
-        <button
-          className={`settings-button ${profileOpen ? 'profile-open' : ''}`}
-          onClick={toggleProfile}
-        >
-          Profile
+        <button className={`circle-button ${profileOpen ? 'profile-open' : ''}`} onClick={toggleProfile}>
+          <img src="/profile.png" className="profile-image" alt="Profile 1" />
+          <p> View Profile</p>
         </button>
-        <button className="settings-button" onClick={handleClearChat}>Clear Chat</button>
-        <button className="settings-button" onClick={handleDeleteAccount} style={{ color: '#FF1121', fontSize: '12px',backgroundColor: '#333333' }}>Delete Account</button>
+        <button className="circle-button" onClick={handleClearChat}>
+          <img src="/clear.png" className="profile-image" alt="Profile 1" />
+          <p>Clear Chat</p>
+        </button>
+        <button className="circle-button delete-button" onClick={handleDeleteAccount}>
+          Delete Account
+        </button>
       </div>
+
       <div className={`profile-section ${profileOpen ? 'open' : ''}`}>
         <div className="profile-info">
           <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" className='profile-image' alt="" />
-          <p><strong>Name ~</strong> {name}</p>
-          <br />
-          <p><strong>Phone Number ~</strong> {phoneNumber}</p>
-          <br />
-          <p><strong>Email ~</strong> {email}</p>
-          <br />
+          <p><strong>Name:</strong> {name}</p>
+          <p><strong>Phone Number:</strong> {phoneNumber}</p>
+          <p><strong>Email:</strong> {email}</p>
         </div>
       </div>
     </div>

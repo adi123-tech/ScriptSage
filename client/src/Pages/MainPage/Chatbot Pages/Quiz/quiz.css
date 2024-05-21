@@ -35,24 +35,21 @@
     font-weight: bolder;
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #7F18D8;
+    background-color: #56299e;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s;
     height: 200px;
     width: 200px;
     right: -24%;
-    border: 4px solid #0056b3; /* Add border color and width */
+    border-bottom: 1px solid #ccc; /* Add border color and width */
     border-radius: 10px;
   }
   
   .quiz-container button:hover {
-    background-color: #0056b3;
-    color: white;
-    border: 4px solid #7e18d8c2; /* Add border color and width */
-    border-radius: 10px;
+    background-color: #7a4db1;
+    transform: scale(1.05);
   }
   
   .result {
@@ -97,7 +94,28 @@
   justify-content: space-evenly; /* Distribute items along the main axis */
   position: relative;
   top: 120px;
-  left: 100px;
+  left: 130px;
+  max-height: 450px; /* Set the maximum height of the div */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 50px;
+  scrollbar-width: thin;
+  scrollbar-color: #434343 #f8f9fa; 
+}
+
+.user-messages::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.user-messages::-webkit-scrollbar-thumb {
+  background: #434343;
+  border-radius: 16px;
+  box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+}
+
+.user-messages::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
 }
 
 .quiz-modules > div {
@@ -135,5 +153,14 @@
 .user-id-quiz{
   position: absolute;
   bottom: 10px;
-  right: 0;
+  right: 5px;
 }
+
+
+.quiz-number {
+  color: white; /* Different color for quiz number */
+  text-decoration: underline;
+  font-weight: bold;
+  margin-right: 10px; /* Space between number and rest of the text */
+}
+

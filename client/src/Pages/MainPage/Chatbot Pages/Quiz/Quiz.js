@@ -196,6 +196,305 @@ function Quiz() {
         }        
       ]
     },
+    {
+      topic: 'Pointers',
+      questions: [
+        {
+          question: 'What is a pointer in C?',
+          options: ['A variable that stores the address of another variable', 'A variable that stores a value', 'A special type of function', 'A data type'],
+          correctAnswer: 'A variable that stores the address of another variable'
+        },
+        {
+          question: 'What is the operator used to access the value pointed to by a pointer in C?',
+          options: ['*', '&', '->', '.'],
+          correctAnswer: '*'
+        },
+        {
+          question: 'Which of the following correctly assigns the address of variable "x" to pointer "ptr" in C?',
+          options: ['ptr = &x;', 'ptr = *x;', 'ptr = x;', 'ptr = &&x;'],
+          correctAnswer: 'ptr = &x;'
+        },
+        {
+          question: 'What happens if you dereference a null pointer in C?',
+          options: ['Segmentation fault', 'Compilation error', 'Undefined behavior', 'Nothing happens'],
+          correctAnswer: 'Undefined behavior'
+        },
+        {
+          question: 'Which of the following is the correct way to declare a pointer to an integer in C?',
+          options: ['int *ptr;', 'ptr int;', 'int ptr;', 'pointer int;'],
+          correctAnswer: 'int *ptr;'
+        }        
+      ]
+    },{
+      topic: 'Structures',
+      questions: [
+        {
+          question: 'What is a structure in C?',
+          options: ['A collection of variables', 'A function', 'A loop', 'A conditional statement'],
+          correctAnswer: 'A collection of variables'
+        },
+        {
+          question: 'How do you access members of a structure in C?',
+          options: ['.', '&', '*', '->'],
+          correctAnswer: '.'
+        },
+        {
+          question: 'Which keyword is used to define a structure in C?',
+          options: ['class', 'struct', 'typedef', 'def'],
+          correctAnswer: 'struct'
+        },
+        {
+          question: 'What is the size of an empty structure in C?',
+          options: ['1 byte', '0 bytes', 'Depends on the compiler', 'Cannot be determined'],
+          correctAnswer: '1 byte'
+        },
+        {
+          question: 'Which of the following correctly declares a structure named "Person" with members "name" and "age" in C?',
+          options: ['struct Person { char* name; int age; };', 'Person { char* name; int age; };', 'struct { char* name; int age; } Person;', 'typedef struct { char* name; int age; } Person;'],
+          correctAnswer: 'struct Person { char* name; int age; };'
+        }        
+      ]
+    },
+    {
+      topic: 'File Handling',
+      questions: [
+        {
+          question: 'What is file handling in C?',
+          options: ['Manipulating files on a computer', 'Handling errors in files', 'Creating temporary files', 'Removing files'],
+          correctAnswer: 'Manipulating files on a computer'
+        },
+        {
+          question: 'Which library is used for file handling in C?',
+          options: ['stdio.h', 'file.h', 'io.h', 'fstream.h'],
+          correctAnswer: 'stdio.h'
+        },
+        {
+          question: 'What is the function used to open a file in C?',
+          options: ['open()', 'fopen()', 'fileopen()', 'readfile()'],
+          correctAnswer: 'fopen()'
+        },
+        {
+          question: 'Which mode is used to open a file in read mode in C?',
+          options: ['r', 'w', 'a', 'rb'],
+          correctAnswer: 'r'
+        },
+        {
+          question: 'What is the function used to close a file in C?',
+          options: ['fclose()', 'close()', 'fileclose()', 'endfile()'],
+          correctAnswer: 'fclose()'
+        }        
+      ]
+    },
+    {
+      topic: 'Dynamic Memory Allocation',
+      questions: [
+        {
+          question: 'What is dynamic memory allocation in C?',
+          options: ['Allocating memory at compile time', 'Allocating memory at runtime', 'Deallocating memory', 'Checking memory leaks'],
+          correctAnswer: 'Allocating memory at runtime'
+        },
+        {
+          question: 'Which function is used to allocate memory dynamically in C?',
+          options: ['malloc()', 'alloc()', 'calloc()', 'new'],
+          correctAnswer: 'malloc()'
+        },
+        {
+          question: 'What is the purpose of realloc() function in C?',
+          options: ['To allocate memory', 'To deallocate memory', 'To change the size of allocated memory', 'To free memory'],
+          correctAnswer: 'To change the size of allocated memory'
+        },
+        {
+          question: 'What happens if dynamic memory allocation fails in C?',
+          options: ['Compilation error', 'Segmentation fault', 'Memory leak', 'Returns NULL'],
+          correctAnswer: 'Returns NULL'
+        },
+        {
+          question: 'Which header file is required for dynamic memory allocation in C?',
+          options: ['stdlib.h', 'memory.h', 'alloc.h', 'malloc.h'],
+          correctAnswer: 'stdlib.h'
+        }        
+      ]
+    },
+    {
+      topic: 'Preprocessor Directives',
+      questions: [
+        {
+          question: 'What are preprocessor directives in C?',
+          options: ['Commands to the compiler', 'Comments', 'Data types', 'Loop constructs'],
+          correctAnswer: 'Commands to the compiler'
+        },
+        {
+          question: 'Which symbol is used to indicate a preprocessor directive in C?',
+          options: ['#', '@', '&', '$'],
+          correctAnswer: '#'
+        },
+        {
+          question: 'What is the purpose of #include directive in C?',
+          options: ['To include a file in the source code', 'To define a function', 'To declare a variable', 'To create a loop'],
+          correctAnswer: 'To include a file in the source code'
+        },
+        {
+          question: 'Which directive is used to define a macro in C?',
+          options: ['#define', '#macro', '#function', '#var'],
+          correctAnswer: '#define'
+        },
+        {
+          question: 'What is the purpose of #ifdef directive in C?',
+          options: ['To check if a macro is defined', 'To include a file conditionally', 'To declare a variable', 'To iterate over a loop'],
+          correctAnswer: 'To check if a macro is defined'
+        }        
+      ]
+    },
+    {
+      topic: 'Strings',
+      questions: [
+        {
+          question: 'What is a string in C?',
+          options: ['A sequence of characters', 'A data type', 'A loop construct', 'A variable'],
+          correctAnswer: 'A sequence of characters'
+        },
+        {
+          question: 'Which library is used for string manipulation in C?',
+          options: ['stdio.h', 'string.h', 'stdlib.h', 'math.h'],
+          correctAnswer: 'string.h'
+        },
+        {
+          question: 'How do you declare a string in C?',
+          options: ['char str[];', 'string str;', 'str str[];', 'char* str;'],
+          correctAnswer: 'char str[];'
+        },
+        {
+          question: 'Which function is used to find the length of a string in C?',
+          options: ['strlen()', 'length()', 'strlength()', 'size()'],
+          correctAnswer: 'strlen()'
+        },
+        {
+          question: 'What happens if you try to modify a string literal in C?',
+          options: ['Results in undefined behavior', 'Compilation error', 'Segmentation fault', 'Nothing happens'],
+          correctAnswer: 'Results in undefined behavior'
+        }
+      ]
+    },
+    {
+      topic: 'Recursion',
+      questions: [
+        {
+          question: 'What is recursion in programming?',
+          options: ['A loop construct', 'A function calling itself', 'A data type', 'A branching structure'],
+          correctAnswer: 'A function calling itself'
+        },
+        {
+          question: 'What is the base case in recursion?',
+          options: ['The case where the function stops calling itself', 'The case where the function calls itself', 'The initial condition', 'The termination condition'],
+          correctAnswer: 'The case where the function stops calling itself'
+        },
+        {
+          question: 'What is the factorial of 0?',
+          options: ['0', '1', 'Undefined', 'Depends on the compiler'],
+          correctAnswer: '1'
+        },
+        {
+          question: 'What is tail recursion?',
+          options: ['A recursive function where the recursive call is the last operation', 'A recursive function that doesn\'t call itself', 'A type of loop', 'A recursive function with multiple base cases'],
+          correctAnswer: 'A recursive function where the recursive call is the last operation'
+        },
+        {
+          question: 'What is the drawback of recursion?',
+          options: ['Increased memory usage', 'Slower execution time', 'Limited use cases', 'Difficult to implement'],
+          correctAnswer: 'Increased memory usage'
+        }
+      ]
+    },
+    {
+      topic: 'Enums',
+      questions: [
+        {
+          question: 'What is an enum in C?',
+          options: ['A data type used to define a set of named integer constants', 'A loop construct', 'A library function', 'A type of pointer'],
+          correctAnswer: 'A data type used to define a set of named integer constants'
+        },
+        {
+          question: 'How do you declare an enum in C?',
+          options: ['enum Color { RED, GREEN, BLUE };', 'enum = { RED, GREEN, BLUE };', 'enum { RED, GREEN, BLUE };', 'Color { RED, GREEN, BLUE };'],
+          correctAnswer: 'enum Color { RED, GREEN, BLUE };'
+        },
+        {
+          question: 'What is the value of the first constant in an enum if not specified?',
+          options: ['0', '1', 'Depends on the compiler', 'Undefined'],
+          correctAnswer: '0'
+        },
+        {
+          question: 'Can you assign custom values to enum constants in C?',
+          options: ['Yes', 'No', 'Depends on the compiler', 'Only to some constants'],
+          correctAnswer: 'Yes'
+        },
+        {
+          question: 'What is the size of an enum in C?',
+          options: ['Depends on the compiler', '1 byte', '4 bytes', '8 bytes'],
+          correctAnswer: 'Depends on the compiler'
+        }
+      ]
+    },
+    {
+      topic: 'Bit Manipulation',
+      questions: [
+        {
+          question: 'What is bit manipulation in C?',
+          options: ['Manipulating bits of a variable directly', 'A loop construct', 'A function', 'A type of pointer'],
+          correctAnswer: 'Manipulating bits of a variable directly'
+        },
+        {
+          question: 'Which operator is used for bitwise AND in C?',
+          options: ['&', '|', '^', '<<'],
+          correctAnswer: '&'
+        },
+        {
+          question: 'What is the result of bitwise OR operation between 1011 and 1100?',
+          options: ['1111', '1101', '1010', '1001'],
+          correctAnswer: '1111'
+        },
+        {
+          question: 'What does the left shift operator do in bit manipulation?',
+          options: ['Shifts bits to the left by a specified number of positions', 'Shifts bits to the right by a specified number of positions', 'Flips all bits', 'Does nothing'],
+          correctAnswer: 'Shifts bits to the left by a specified number of positions'
+        },
+        {
+          question: 'Which function is used to set a particular bit in C?',
+          options: ['|', '&', '^', '<<'],
+          correctAnswer: '|'
+        }
+      ]
+    },
+    {
+      topic: 'Pointers and Arrays',
+      questions: [
+        {
+          question: 'What is the relationship between pointers and arrays in C?',
+          options: ['Arrays are accessed using pointers', 'Pointers are accessed using arrays', 'There is no relationship', 'They are completely different'],
+          correctAnswer: 'Arrays are accessed using pointers'
+        },
+        {
+          question: 'How can you dynamically allocate an array in C using pointers?',
+          options: ['Using malloc()', 'Using sizeof() operator', 'Using free()', 'Using realloc()'],
+          correctAnswer: 'Using malloc()'
+        },
+        {
+          question: 'What is pointer arithmetic in C?',
+          options: ['Performing arithmetic operations on pointers', 'A type of loop', 'A library function', 'A type of pointer'],
+          correctAnswer: 'Performing arithmetic operations on pointers'
+        },
+        {
+          question: 'What does the expression "ptr++" do for a pointer ptr in C?',
+          options: ['Increments the pointer to point to the next element', 'Decrements the pointer to point to the previous element', 'Does nothing', 'Frees memory'],
+          correctAnswer: 'Increments the pointer to point to the next element'
+        },
+        {
+          question: 'How do you access the third element of an array using a pointer in C?',
+          options: ['*(arr + 2)', '*(arr + 3)', '*(arr - 2)', '*(arr - 3)'],
+          correctAnswer: '*(arr + 2)'
+        }
+      ]
+    },
   ];
 
   const startQuiz = (sectionIndex) => {
@@ -343,9 +642,10 @@ function Quiz() {
           {sections.map((section, index) => (
             <div key={index}>
               <button onClick={() => startQuiz(index)}>
+              <span className="quiz-number">Quiz No. {index + 1}</span><br />
                 Start {section.topic} Quiz 
                 {sectionInitiallyWrong[index] && !sectionCompleted[index] && <span className="initially-wrong">❌</span>}
-                {sectionCompleted[index] && <span className="completed">👌</span>}
+                {sectionCompleted[index] && <span className="completed">✅</span>}
               </button>
               <br />
             </div>
