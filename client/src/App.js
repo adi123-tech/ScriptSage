@@ -12,7 +12,7 @@ function App() {
     }
 
   return (
-    <>  
+    <> 
     <div className="content-container">
       {/* Your existing content excluding the footer */}
       <div className="logo-container">

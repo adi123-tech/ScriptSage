@@ -506,3 +506,44 @@ app.delete("/delete-account/:userId", async (req, res) => {
     res.status(500).json({ success: false, error: "Error deleting account" });
   }
 });
+
+const axios = require('axios');
+
+app.post("/compile", async (req, res) => {
+  // Extracting data from the request
+  let code = req.body.code;
+  let language = req.body.language;
+  let input = req.body.input;
+
+  // Only process requests for the C language
+  if (language.toLowerCase() !== "c") {
+      return res.status(400).json({ error: "Only C language is supported" });
+  }
+
+  const options = {
+      method: 'POST',
+      url: 'https://online-code-compiler.p.rapidapi.com/v1/',
+      headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': '4d46ead6e6mshd7bbbfa3e0502c1p122c05jsn68ea42912c42',
+          'X-RapidAPI-Host': 'online-code-compiler.p.rapidapi.com'
+      },
+      data: {
+          language: 'c',
+          version: 'latest',
+          code: code,
+          input: input
+      }
+  };
+
+  try {
+      const response = await axios.request(options);
+      res.send(response.data);
+      console.log(response.data);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+  }
+});
+
+
