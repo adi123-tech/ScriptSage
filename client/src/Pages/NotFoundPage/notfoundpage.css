@@ -27,13 +27,7 @@
     z-index: 1; /* Ensure text appears above the image */
   }
   
-  .notfound-container h1::before,
-  .notfound-container h1::after {
-    content: "You Didn't Know the URL BRO...."; /* Set the content of the pseudo-elements */
-    position: absolute; /* Position the pseudo-elements absolutely */
-    color: red; /* Apply the text color */
-    z-index: 1; /* Ensure text appears above the image */
-  }
+  
   
   .notfound-container h1::before {
     top: -10px; /* Adjust the position of the first cloned text */
@@ -53,4 +47,6 @@
       transform: translateY(-20px); /* Adjust bounce height as needed */
     }
   }
+
+  
   

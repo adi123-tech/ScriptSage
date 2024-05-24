@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar'; // Assuming you have a Navbar component i
 import "./Tutorials.css";
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../../../../UserContext';
+import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 
 function Tutorials() {
   const { userId } = useUser();
@@ -159,6 +160,7 @@ function Tutorials() {
 
   return (
     <div>
+      <CombineLogo />
       <p className='user-id-quiz'>User ID: {userId}</p>
       <Navbar />
       {/* <h1 style={{ textAlign: 'center' }}>Tutorials on C Programming</h1> */}

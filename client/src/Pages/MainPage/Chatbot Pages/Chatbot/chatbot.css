@@ -494,5 +494,17 @@
   top: 160px;
 }
 
+.combine-logo .logo-container{
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+}
+
+.combine-logo .website-name-container{
+  position: absolute;
+  bottom: 20%;
+  left: -10%;
+}
+
 }
 

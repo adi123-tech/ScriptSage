@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import  './chatbot.css';
 import Loader from '../../../Loader/Loader';
 import { useUser } from '../../../../UserContext';
-
+import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 
 let messageIdCounter = 0;
 
@@ -381,6 +381,7 @@ const clearChatBox = () => {
 
   return (
     <div className="abcd">
+      <CombineLogo />
           <div>
             <div className="user-messages" ref={userMessagesDivRef}>
               {/* User messages will be added here dynamically */}

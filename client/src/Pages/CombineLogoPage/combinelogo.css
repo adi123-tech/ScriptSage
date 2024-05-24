@@ -1,0 +1,23 @@
+.combine-logo {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 20px; /* Adjust the distance from the left */
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-containers-inside {
+    margin-right: 10px;
+  }
+  
+  .logo-containers-inside img {
+    height: 50px;
+  }
+  
+  /* Target only h1 elements inside .website-name-containers-inside */
+  .combine-logo .website-name-containers-inside h2 {
+    margin: 0 !important;
+    font-size: 24px !important;
+  }
+  
+  

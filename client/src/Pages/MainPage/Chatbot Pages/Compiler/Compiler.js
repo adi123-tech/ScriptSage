@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './Compiler.css';
 import axios from 'axios';
 import { useUser } from '../../../../UserContext';
-
+import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 
 function Compiler() {
   const { userId } = useUser();
@@ -65,6 +65,7 @@ function Compiler() {
 
   return (
     <>
+   <CombineLogo />
     <p className='user-id-compiler'>User ID: {userId}</p>
       <div className='outer-container'>
         <Navbar/>

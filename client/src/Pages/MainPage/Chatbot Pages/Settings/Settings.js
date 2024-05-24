@@ -4,7 +4,7 @@ import { useUser } from '../../../../UserContext';
 import { useNavigate } from 'react-router-dom';
 import './settings.css';
 import axios from 'axios'; // Import Axios for making HTTP requests
-
+import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 function Settings() {
   const navigate = useNavigate();
   const { userId } = useUser();
@@ -78,6 +78,7 @@ function Settings() {
 
   return (
     <div className="settings-container">
+      <CombineLogo />
       <Navbar />
       <img className='settings-img' src="/settings.png" alt="" />
       <p className='user-id-settings'>User ID: {userId}</p>

@@ -8,7 +8,7 @@ function FAQPage() {
       <div className="logo-container">
       <div className='go-back'>
           <p>Go Back</p>
-        </div>
+       </div>
       <NavLink to="/">
           <img src="/Logo.png" alt="Logo" />
         </NavLink>

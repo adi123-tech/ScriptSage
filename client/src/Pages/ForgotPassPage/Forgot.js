@@ -1,10 +1,7 @@
 import React from 'react';
 import "../LoginPage/login.css";
 import axios from 'axios';
-// import Email_Validations from '../Notification Popups/Email_Validations';
-// import Password_Validations from '../Notification Popups/Password_Validations';
-// import User_Not_Found from '../Notification Popups/User_Not_Found';
-// import Good from '../Notification Popups/Good';
+import CombineLogo from '../CombineLogoPage/CombineLogo';
 
 class Forgot extends React.Component {
   constructor(props) {
@@ -297,6 +294,7 @@ class Forgot extends React.Component {
     const {emailNotFound, emailStatus, passwordStatus, retypePasswordStatus, emailErrorMessage, passwordErrorMessage, retypePasswordErrorMessage, message, emailValidationNeeded, newpasswordValidationNeeded, otpInputs, showVerifyButton,showSignUpButton } = this.state;
     return (
       <div className="container" id="container">
+        <CombineLogo/>
         <div className="form-container sign-in-container">
           <form onSubmit={this.handleForgotPassForm}>
             {emailValidationNeeded}

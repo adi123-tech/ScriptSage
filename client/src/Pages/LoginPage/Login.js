@@ -5,7 +5,7 @@ import "./login.css";
 import { useNavigate } from 'react-router-dom';
 import { validateEmail, validatePassword ,validateIndianPhoneNumber } from './validationUtils';
 import { useUser } from '../../UserContext';
-
+import CombineLogo from '../CombineLogoPage/CombineLogo';
 
 
 function Login({ handleLoginStatus }) {
@@ -318,6 +318,7 @@ const errorStyle = {
   
   return (
     <div className="container" id="container">
+      <CombineLogo/>
       <div className="form-container sign-up-container">
         <form onSubmit={handleSubmit}>
           <h1>Create Account</h1>

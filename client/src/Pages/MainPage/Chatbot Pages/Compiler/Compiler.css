@@ -62,3 +62,15 @@ button:hover {
     bottom: 10px;
     right: 5px;
 }
+
+.combine-logo .logo-container{
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+  }
+  
+  .combine-logo .website-name-container{
+    position: absolute;
+    bottom: 18%;
+    left: -0.1%;
+  }

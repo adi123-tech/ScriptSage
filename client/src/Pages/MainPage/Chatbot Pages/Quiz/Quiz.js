@@ -3,7 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import './quiz.css';
 import { useUser } from '../../../../UserContext';
 import axios from 'axios';
-
+import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 function Quiz() {
   const { userId } = useUser();
   const [currentSection, setCurrentSection] = useState(null);
@@ -632,6 +632,7 @@ function Quiz() {
 
   return (
     <>
+     <CombineLogo />
     <p className='user-id-quiz'>User ID: {userId}</p>
     <div className='quiz-container'>
       <Navbar />
