@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
-import Quizlogo from './Quizlogo';
 import './quiz.css';
 import { useUser } from '../../../../UserContext';
 import axios from 'axios';
@@ -636,7 +635,6 @@ function Quiz() {
     <p className='user-id-quiz'>User ID: {userId}</p>
     <div className='quiz-container'>
       <Navbar />
-      <Quizlogo/>
       {currentSection === null ? (
         <div className='quiz-modules'> 
           {sections.map((section, index) => (
