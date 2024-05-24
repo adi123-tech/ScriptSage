@@ -1,11 +1,11 @@
 import './App.css';
-import { useNavigate } from "react-router-dom";
-import React , { Component}  from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
+import React , { useState}  from 'react';
 
 
 function App() {
 
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
  
     const loginPage = () => {
         navigate('/loginpage')
@@ -25,11 +25,12 @@ function App() {
       {/* Navigation bar with links */}
       <div className='nav2'>
       <nav>
-        <a>About us</a>
-        <a>Collaboration</a>
-        <a>Download</a>
-        <a>FAQ</a>
-      </nav>
+          <NavLink to="/about">About us</NavLink>
+          <NavLink to="/collaboration">Collaboration</NavLink>
+          <NavLink to="/download">Download</NavLink>
+          <NavLink to="/faq">FAQ</NavLink>
+          {/* Add more navigation links as needed */}
+       </nav>
       </div>
 
       <div id="Login"> 

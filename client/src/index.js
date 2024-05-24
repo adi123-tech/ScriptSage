@@ -12,6 +12,10 @@ import Quiz from './Pages/MainPage/Chatbot Pages/Quiz/Quiz';
 import Settings from './Pages/MainPage/Chatbot Pages/Settings/Settings';
 import Tutorials from './Pages/MainPage/Chatbot Pages/Tutorial/Tutorials';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
+import AboutUsPage from './Pages/Pages_Root/AboutUsPage';
+import CollaborationPage from './Pages/Pages_Root/CollaborationPage';
+import DownloadPage from './Pages/Pages_Root/DownloadPage';
+import FAQPage from './Pages/Pages_Root/FAQPage';
 import { UserProvider } from './UserContext';
 
 function Index() {
@@ -37,6 +41,10 @@ function Index() {
         <UserProvider>
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/collaboration" element={<CollaborationPage />} />
+            <Route path="/download" element={<DownloadPage />} />
+            <Route path="/faq" element={<FAQPage />} />
             <Route path="/loginpage" element={<Login handleLoginStatus={handleLoginStatus} />} />
             <Route path="/forgotpage" element={<Forgot />} />
             <Route path="/not_found_page" element={<NotFoundPage />} />

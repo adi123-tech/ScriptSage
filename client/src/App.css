@@ -14,10 +14,7 @@
         color: white;
         font-family: 'Inter', sans-serif;
     }
-
       
-      
-
     .nav2 nav {
         color: white;
         padding: 10px;
@@ -204,6 +201,7 @@
 
   #maintext
   {
+    z-index: -1;
       text-align: left;
       font-size: 3.2rem;
       font-weight: bolder;
@@ -301,6 +299,18 @@
   .content-container {
       max-width: 100%; /* Ensure content does not exceed viewport width */
       overflow-x: hidden; /* Hide horizontal scroll */
+  }
+
+  .logo-container .go-back {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translateX(-50%);
+    background-color: #6f726f;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
   }
   
   
