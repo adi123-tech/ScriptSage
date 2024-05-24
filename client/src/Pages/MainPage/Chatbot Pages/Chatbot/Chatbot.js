@@ -122,9 +122,9 @@ const fetchRecentChats = () => {
     }
   
     // Automatically append 'in C programming language' to the message if it is not a pre-defined topic message
-    if (!inputMessage) {
+    
       message += ' in C programming language';
-    }
+  
   
     addUserMessage(message);
   
