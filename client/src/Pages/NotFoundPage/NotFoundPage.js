@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 function NotFoundPage() {
   return (
     <>
-    <div className="logo-container">
+    <div className="go-back-container">
         <div className='go-back'>
           <p>Go Back</p>
         </div>

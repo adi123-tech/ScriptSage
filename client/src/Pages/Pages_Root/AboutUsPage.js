@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function AboutUsPage() {
   return (
     <div>
-      <div className="logo-container">
+      <div className="go-back-container">
         <div className='go-back'>
           <p>Go Back</p>
         </div>

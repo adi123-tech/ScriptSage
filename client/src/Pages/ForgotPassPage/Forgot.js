@@ -2,6 +2,8 @@ import React from 'react';
 import "../LoginPage/login.css";
 import axios from 'axios';
 import CombineLogo from '../CombineLogoPage/CombineLogo';
+import { NavLink } from 'react-router-dom';
+
 
 class Forgot extends React.Component {
   constructor(props) {
@@ -293,6 +295,16 @@ class Forgot extends React.Component {
   render() {
     const {emailNotFound, emailStatus, passwordStatus, retypePasswordStatus, emailErrorMessage, passwordErrorMessage, retypePasswordErrorMessage, message, emailValidationNeeded, newpasswordValidationNeeded, otpInputs, showVerifyButton,showSignUpButton } = this.state;
     return (
+      <>
+       <div className="go-back-container">
+        <div className='go-back'>
+          <p>Go Back</p>
+        </div>
+        <NavLink to="/">
+            <img src="/Logo.png" alt="Logo" />
+        </NavLink>
+      </div>
+
       <div className="container" id="container">
         <CombineLogo/>
         <div className="form-container sign-in-container">
@@ -374,6 +386,7 @@ class Forgot extends React.Component {
         <img src="/Forgot.jpg" id="img-forgot"/>
        <img src="/Forgot2-removebg.png" id="img-forgot-2"/>
       </div>
+      </>
     );
   }
 }

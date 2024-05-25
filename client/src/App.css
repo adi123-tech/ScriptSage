@@ -301,8 +301,8 @@
       overflow-x: hidden; /* Hide horizontal scroll */
   }
 
-  .logo-container .go-back {
-    position: absolute;
+  .go-back-container .go-back {
+    position: fixed;
     top: 5%;
     left: 10%;
     transform: translateX(-50%);
@@ -311,6 +311,14 @@
     border-radius: 10px;
     color: white;
     font-size: 14px;
+  }
+
+  .go-back-container img{
+    position: fixed;
+      top: 30px;
+      left: 60px;
+      z-index: 3;
+      height: 80px;
   }
   
   

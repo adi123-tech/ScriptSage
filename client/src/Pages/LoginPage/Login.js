@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { validateEmail, validatePassword ,validateIndianPhoneNumber } from './validationUtils';
 import { useUser } from '../../UserContext';
 import CombineLogo from '../CombineLogoPage/CombineLogo';
+import { NavLink } from 'react-router-dom';
 
 
 function Login({ handleLoginStatus }) {
@@ -317,6 +318,15 @@ const errorStyle = {
   
   
   return (
+    <>
+    <div className="go-back-container">
+        <div className='go-back'>
+          <p>Go Back</p>
+        </div>
+        <NavLink to="/">
+            <img src="/Logo.png" alt="Logo" />
+        </NavLink>
+      </div>
     <div className="container" id="container">
       <CombineLogo/>
       <div className="form-container sign-up-container">
@@ -523,6 +533,7 @@ const errorStyle = {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
