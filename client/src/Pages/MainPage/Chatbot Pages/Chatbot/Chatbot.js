@@ -427,8 +427,6 @@ const clearChatBox = () => {
               {loadingGifDisplay && <Loader />}
             </div>
 
-
-
             <div className="form-group mt-3">
               <textarea
                 className="form-control"

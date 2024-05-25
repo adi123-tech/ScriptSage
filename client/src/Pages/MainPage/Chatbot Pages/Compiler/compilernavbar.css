@@ -5,9 +5,16 @@
     height: 50px;
     text-align: center;
     color: #afec3f;
-    background-color: #474747;
+    /* background-color: #474747; */
     gap: 20px;
 }
+
+.title-C-Program {
+    text-align: center;
+    border: 5px solid #895EE6;
+    /* border-radius: 15px; */
+}
+
 
 #no {
     height: 36px;
@@ -23,13 +30,5 @@
     outline: none;
 }
 
-.css-2b097c-container {
-    width: 120px;
-    color: black;
-    background-color: #474747;
-}
 
-.css-yk16xz-control {
-    background-color: #474747 !important;
-    border-color: #afec3f !important;
-}
+

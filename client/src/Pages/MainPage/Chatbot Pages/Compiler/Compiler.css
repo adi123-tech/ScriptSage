@@ -8,7 +8,7 @@
   
   .main {
     display: flex;
-    height: 80vh;
+    height: 79vh;
     width: 200vh;
   }
   
@@ -20,6 +20,26 @@
 
   .left-container textarea{
     color: black;
+    scrollbar-width: thin;
+  scrollbar-color: #434343 #f8f9fa; 
+  outline: none;
+    border: 5px solid #895EE6;
+  border-radius: 15px;
+  }
+
+  .left-container textarea::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .left-container textarea::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+  }
+  
+  .left-container textarea::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
   }
   
   .right-container {
@@ -28,12 +48,31 @@
     display: flex;
     flex-direction: column;
     background-color: #242424;
-    border-left: 3px solid #1f65e6;
-    padding: 5px;
+    padding: 5px;    
   }
   
   .right-container textarea{
     color: black;
+    scrollbar-width: thin;
+    scrollbar-color: #434343 #f8f9fa; 
+    outline: none;
+    border: 5px solid #895EE6;
+  border-radius: 15px;
+  }
+
+  .right-container textarea::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .right-container textarea::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+  }
+  
+  .right-container textarea::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
   }
 
   .input-box {
@@ -59,6 +98,7 @@
   
   .output-box {
     flex: 50%;
+    height: 50px;
     background-color: #242424;
     overflow-y: auto;
     color: white;
@@ -67,8 +107,8 @@
   
   .clear-btn {
     position: fixed;
-    bottom: 10px;
-    left: 140px;
+    bottom: 37%;
+    right: 13%;
     width: 80px;
     height: 40px;
     font-size: 22px;
@@ -80,10 +120,32 @@
     transition: 0.3s;
     cursor: pointer;
   }
+
+  .Compiler .run-btn:hover{
+    background-color: #242424;
+  }
   
   .output-box pre {
-    font-size: 15px;
+    font-size: 10px;
     white-space: pre-wrap;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  scrollbar-color: #434343 #f8f9fa; 
+  }
+
+  .output-box pre::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .output-box pre::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+  }
+  
+  .output-box pre::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
   }
   
   h4 {
@@ -122,8 +184,8 @@
   
   .run-btn {
     position: fixed;
-    bottom: 10px;
-    left: 60px;
+    bottom: 50px;
+    left: 53%;
     width: 80px;
     height: 40px;
     font-size: 22px;
@@ -147,8 +209,41 @@
 }
 
 .explain-btn{
-  position: absolute;
-  bottom: 40%;
-  right: 2%;
+  position: fixed;
+  bottom: 37%;
+  right: 4%;
   padding: 5px 5px 5px 5px;
+}
+
+.modal-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Adjust height as needed */
+}
+
+.loading-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0 5px;
+  animation: dot-fade 1.5s infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes dot-fade {
+  0%, 100% {
+      opacity: 0.2;
+  }
+  50% {
+      opacity: 1;
+  }
 }

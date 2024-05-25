@@ -18,12 +18,14 @@ const beautifyMessage = (message) => {
 function Compiler() {
     const [userCode, setUserCode] = useState(localStorage.getItem('userCode') || '');
     const [userLang, setUserLang] = useState('c');
-    const [fontSize, setFontSize] = useState(20);
+    const [fontSize, setFontSize] = useState(18);
     const [userInput, setUserInput] = useState(localStorage.getItem('userInput') || '');
     const [userOutput, setUserOutput] = useState(localStorage.getItem('userOutput') || '');
     const [explanation, setExplanation] = useState('');
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showModalNothing, setShowModalNothing] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false); // New state for modal loading
 
     useEffect(() => {
         localStorage.setItem('userCode', userCode);
@@ -40,6 +42,8 @@ function Compiler() {
     function compile() {
         setLoading(true);
         if (userCode === '') {
+            setLoading(false);
+            setShowModalNothing(true);
             return;
         }
 
@@ -57,30 +61,37 @@ function Compiler() {
     }
 
     function explainErrorOutput() {
+        setShowModal(true);
+        setModalLoading(true);
         if (userOutput.trim() === '') {
+            setModalLoading(false);
             setExplanation('No output or error');
-            setShowModal(true);
         } else {
+            setModalLoading(true);
+            const message = userCode + '\n\n' + userOutput; // Concatenating userCode and userOutput
             Axios.post('http://localhost:7000/api', {
-                message: userOutput
+                message: message
             })
             .then((res) => {
                 setExplanation(res.data.response);
-                setShowModal(true);
             })
             .catch((err) => {
                 console.error(err);
                 setExplanation('Failed to get explanation.');
-                setShowModal(true);
+            })
+            .finally(() => {
+                setModalLoading(false); // Reset modal loading state
             });
         }
     }
+    
 
     function clearOutput() {
         setUserOutput('');
         setExplanation('');
     }
-
+    
+      
     return (
         <div className="Compiler">
             <Navbar />
@@ -108,18 +119,20 @@ function Compiler() {
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             className="input-textarea"
-                            style={{ width: '100%', height: '85%', fontSize: `${fontSize}px` }}
+                            style={{ width: '100%', height: '85%', fontSize: `${fontSize}px`}}
                             placeholder="Enter input here"
                         />
                     </div>
                     <h4>Output:</h4>
                     {loading ? (
-                        <div className="spinner-box">
-                            <img alt="Loading..." />
+                        <div className="spinner-box" style={{ backgroundColor: 'transparent', color: 'white',position: 'relative',bottom: '50px' }}>
+                            <div className="loading-dot" />
+                            <div className="loading-dot" />
+                            <div className="loading-dot" />
                         </div>
                     ) : (
                         <div className="output-box">
-                            <pre style={{ fontSize: `${fontSize}px` }}>{userOutput}</pre>
+                            <pre style={{ fontSize: `${fontSize}px`, height: '200px' }}>{userOutput}</pre>
                             <button onClick={() => clearOutput()} className="clear-btn">
                                 Clear
                             </button>
@@ -130,10 +143,24 @@ function Compiler() {
                     )}
                 </div>
             </div>
+            <Modal show={showModalNothing} handleClose={() => setShowModalNothing(false)}>
+                <div style={{color: 'black'}}>Code Input Field is Empty!!!!</div>
+            </Modal>
             <Modal show={showModal} handleClose={() => setShowModal(false)}>
-                <p className="explanation-title">Explanation:</p>
-                {/* Beautify the explanation content */}
-                <div dangerouslySetInnerHTML={{__html: beautifyMessage(explanation)}} />
+                {modalLoading ? (
+                    <div className="modal-loading" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}>
+                        <div className="loading-dot" />
+                        <div className="loading-dot" />
+                        <div className="loading-dot" />
+                    </div>
+                
+                ) : (
+                    <>
+                        <p className="explanation-title">Explanation:</p>
+                        {/* Beautify the explanation content */}
+                        <div dangerouslySetInnerHTML={{__html: beautifyMessage(explanation)}} />
+                    </>
+                )}
             </Modal>
         </div>
     );

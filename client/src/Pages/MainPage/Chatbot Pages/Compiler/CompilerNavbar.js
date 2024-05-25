@@ -11,12 +11,10 @@ const CompilerNavbar = ({ userLang, setUserLang, fontSize, setFontSize }) => {
 
   return (
     <div className="CompilerNavbar">
-      <Select
-        options={languages}
-        value={{ value: userLang, label: "C Programming Language" }}
-        onChange={(e) => setUserLang(e.value)}
-        placeholder="C Programming Language"
-      />
+      <div className='title-C-Program'>
+        <h1>C Programming Language Compiler</h1>
+      </div>
+
       <label>Font Size</label>
       <input
         type="range"
