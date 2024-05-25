@@ -4,6 +4,14 @@ import './quiz.css';
 import { useUser } from '../../../../UserContext';
 import axios from 'axios';
 import CombineLogo from '../../../CombineLogoPage/CombineLogo';
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
+
+
 function Quiz() {
   const { userId } = useUser();
   const [currentSection, setCurrentSection] = useState(null);
@@ -11,6 +19,33 @@ function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [sectionCompleted, setSectionCompleted] = useState(new Array(5).fill(false));
   const [sectionInitiallyWrong, setSectionInitiallyWrong] = useState(new Array(5).fill(true));
+  const [timeLeft, setTimeLeft] = useState(null);
+
+  useEffect(() => {
+    // Timer logic
+    if (currentSection !== null) {
+      setTimeLeft(1 * 10); // Set initial time for each quiz section (e.g., 10 minutes)
+    } else {
+      setTimeLeft(null);
+    }
+  }, [currentSection]);
+
+  useEffect(() => {
+    // Timer countdown logic
+    if (timeLeft === null) return;
+
+    if (timeLeft === 0) {
+      finishQuiz(); // Auto-submit quiz when time runs out
+      return;
+    }
+
+    const timerId = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [timeLeft]);
+
 
   useEffect(() => {
     // Define an async function to fetch quiz progress
@@ -555,6 +590,7 @@ function Quiz() {
     return (
       <div>
         <h2>Quiz: {sections[currentSection].topic}</h2>
+        <p id="timer">Time Left: {formatTime(timeLeft)}</p>
         <br />
         {sections[currentSection].questions.map((question, index) => (
           <div key={index} className="question">
