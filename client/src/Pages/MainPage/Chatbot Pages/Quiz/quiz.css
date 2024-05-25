@@ -118,6 +118,11 @@
   background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
 }
 
+.quiz-modules{
+  background-color: #283142;
+  border-radius: 15px;
+}
+
 .quiz-modules > div {
   width: calc(33.33% - 20px); /* Calculate width for three items with margin */
   margin-bottom: 20px; /* Add margin between items */
@@ -125,6 +130,8 @@
 
 .quiz-modules button {
   width: 100%; /* Make buttons take full width of their container */
+  position: relative;
+  left: 12%;
 }
 
 

@@ -79,7 +79,7 @@ function App() {
       </div>
     </div>
 
-    <footer>
+    {/* <footer>
       <div className="footer-content">
         <div className="footer-section">
           <h2 style={{ backgroundColor: '#23262F' }}>Contact Us</h2>
@@ -101,7 +101,7 @@ function App() {
       <div className="footer-bottom">
         <p style={{ backgroundColor: '#23262F' }}>&copy; 2023 ScriptSage. All rights reserved.</p>
       </div>
-    </footer>
+    </footer> */}
     
   </>
   );
