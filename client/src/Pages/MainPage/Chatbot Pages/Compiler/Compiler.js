@@ -1,39 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Compiler.css';
 import CompilerNavbar from './CompilerNavbar';
 import Navbar from '../Navbar/Navbar';
 import Axios from 'axios';
+import Modal from './PopUpPage/Modal';
+
+const beautifyMessage = (message) => {
+    const formattedMessage = message
+      .replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>') 
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')       
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')                   
+      .replace(/\n/g, '<br>');                                
+  
+    return `<div class='explanation-title' style='background-color: #283142; color: white; height: 300px; overflow-y: auto;'>${formattedMessage}</div>`;
+};
 
 function Compiler() {
-    // State variable to set user's source code
-    const [userCode, setUserCode] = useState('');
-
-    // State variable to set editor's default language
+    const [userCode, setUserCode] = useState(localStorage.getItem('userCode') || '');
     const [userLang, setUserLang] = useState('c');
-
-    // State variable to set editor's default theme
-    const [userTheme, setUserTheme] = useState('vs-dark');
-
-    // State variable to set editor's default font size
     const [fontSize, setFontSize] = useState(20);
-
-    // State variable to set user's input
-    const [userInput, setUserInput] = useState('');
-
-    // State variable to set user's output
-    const [userOutput, setUserOutput] = useState('');
-
-    // Loading state variable to show spinner while fetching data
+    const [userInput, setUserInput] = useState(localStorage.getItem('userInput') || '');
+    const [userOutput, setUserOutput] = useState(localStorage.getItem('userOutput') || '');
+    const [explanation, setExplanation] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-    // Function to call the compile endpoint
+    useEffect(() => {
+        localStorage.setItem('userCode', userCode);
+    }, [userCode]);
+
+    useEffect(() => {
+        localStorage.setItem('userInput', userInput);
+    }, [userInput]);
+
+    useEffect(() => {
+        localStorage.setItem('userOutput', userOutput);
+    }, [userOutput]);
+
     function compile() {
         setLoading(true);
         if (userCode === '') {
             return;
         }
 
-        // Post request to compile endpoint
         Axios.post('http://localhost:5000/compile', {
             code: userCode,
             language: userLang,
@@ -47,14 +56,34 @@ function Compiler() {
         });
     }
 
-    // Function to clear the output screen
+    function explainErrorOutput() {
+        if (userOutput.trim() === '') {
+            setExplanation('No output or error');
+            setShowModal(true);
+        } else {
+            Axios.post('http://localhost:7000/api', {
+                message: userOutput
+            })
+            .then((res) => {
+                setExplanation(res.data.response);
+                setShowModal(true);
+            })
+            .catch((err) => {
+                console.error(err);
+                setExplanation('Failed to get explanation.');
+                setShowModal(true);
+            });
+        }
+    }
+
     function clearOutput() {
         setUserOutput('');
+        setExplanation('');
     }
 
     return (
         <div className="Compiler">
-          <Navbar/>
+            <Navbar />
             <CompilerNavbar
                 userLang={userLang} setUserLang={setUserLang}
                 fontSize={fontSize} setFontSize={setFontSize}
@@ -65,7 +94,7 @@ function Compiler() {
                         value={userCode}
                         onChange={(e) => setUserCode(e.target.value)}
                         className="code-textarea"
-                        style={{ width: '100%', height: '85%', fontSize: `${fontSize}px` }} // Adjust font size dynamically
+                        style={{ width: '100%', height: '85%', fontSize: `${fontSize}px` }}
                         placeholder="# Enter your code here"
                     />
                     <button className="run-btn" onClick={() => compile()}>
@@ -79,7 +108,7 @@ function Compiler() {
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             className="input-textarea"
-                            style={{ width: '100%', height: '85%', fontSize: `${fontSize}px` }} // Adjust font size dynamically
+                            style={{ width: '100%', height: '85%', fontSize: `${fontSize}px` }}
                             placeholder="Enter input here"
                         />
                     </div>
@@ -94,10 +123,18 @@ function Compiler() {
                             <button onClick={() => clearOutput()} className="clear-btn">
                                 Clear
                             </button>
+                            <button onClick={() => explainErrorOutput()} className="explain-btn">
+                                Explain Error / Output
+                            </button>
                         </div>
                     )}
                 </div>
             </div>
+            <Modal show={showModal} handleClose={() => setShowModal(false)}>
+                <p className="explanation-title">Explanation:</p>
+                {/* Beautify the explanation content */}
+                <div dangerouslySetInnerHTML={{__html: beautifyMessage(explanation)}} />
+            </Modal>
         </div>
     );
 }

@@ -89,6 +89,22 @@
   h4 {
     color: white;
   }
+
+  .explanation-title {
+    color: #333; /* Adjust the color as needed */
+    font-weight: bold;
+}
+
+.explanation-content {
+  color: #555;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 100%; /* Adjust maximum width */
+  max-height: 300px; /* Adjust maximum height */
+  overflow: auto; /* Enable scrolling if content exceeds dimensions */
+  word-wrap: break-word; /* Enable word wrapping */
+}
   
   #code-inp {
     box-sizing: border-box;
@@ -123,3 +139,16 @@
     background-color:#474747;
   }
   
+  .code-textarea,
+.input-textarea {
+    resize: none;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.explain-btn{
+  position: absolute;
+  bottom: 40%;
+  right: 2%;
+  padding: 5px 5px 5px 5px;
+}
