@@ -72,8 +72,8 @@ function Questions() {
             const generatedQuestion = data.response.toString();
             
             // Store generated question in local storage
+            localStorage.removeItem('QuestionIndex');
             localStorage.setItem('selectedQuestion', generatedQuestion);
-    
             setSelectedQuestion(generatedQuestion);
             setShowModalProblem(true);
             setShowGenerateModal(false);
