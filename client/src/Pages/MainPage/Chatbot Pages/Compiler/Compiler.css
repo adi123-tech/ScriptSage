@@ -253,26 +253,44 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 200px; /* Adjust height as needed */
+  height: 300px; /* Adjust height as needed */
   width: 80%; /* Adjust width as needed */
   max-width: 400px; /* Maximum width */
-  background-color: #56299E;
+  background-color:#242424;
   color: white;
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adjust shadow as needed */
-  padding: 20px; /* Adjust padding as needed */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8); /* Adjust shadow as needed */
+  padding: 20px 5px 5px 5px ; /* Adjust padding as needed */
   z-index: 100000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: block;
+  text-align: left;
   flex-direction: column; 
   font-size: 1.2em; /* Adjust font size as needed */
   cursor: move;
   user-select: none;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #434343 #f8f9fa; 
+  outline: none;
+}
+
+.Compiler .transferred-question ::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.Compiler .transferred-question ::-webkit-scrollbar-thumb {
+  background: #434343;
+  border-radius: 16px;
+  box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+}
+
+.Compiler .transferred-question ::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
 }
 
 .Compiler .transferred-question p {
   margin: 0;
 }
+
 

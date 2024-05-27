@@ -15,6 +15,16 @@ const beautifyMessage = (message) => {
     return `<div class='explanation-title' style='background-color: #283142; color: white; height: 300px; overflow-y: auto;'>${formattedMessage}</div>`;
 };
 
+const beautifyMessage2 = (message) => {
+    const formattedMessage = message
+      .replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>') 
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')       
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')                   
+      .replace(/\n/g, '<br>');                                
+  
+    return `<div class='transferred-question' style='background-color: #283142; color: white;width: 100%; height: 250px; position: relative; top: 130px'>${formattedMessage}</div>`;
+};
+
 function Compiler() {
     const [userCode, setUserCode] = useState(localStorage.getItem('userCode') || '');
     const [userLang, setUserLang] = useState('c');
@@ -136,8 +146,8 @@ useEffect(() => {
                 ref={dragRef}
                 onMouseDown={() => setDragging(true)}
                 >
-                <p style={{color : 'red'}}>Drag this box where you want</p>
-                {selectedQuestion}
+                <p className='Drag-box-p' style={{ color: 'red' }}>Drag this box where you want </p>
+                <div dangerouslySetInnerHTML={{ __html: beautifyMessage2(selectedQuestion) }} />
             </div>
             <div className="main">
                 <div className="left-container">
