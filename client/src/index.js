@@ -8,6 +8,7 @@ import Login from './Pages/LoginPage/Login';
 import Forgot from './Pages/ForgotPassPage/Forgot';
 import Chatbot from './Pages/MainPage/Chatbot Pages/Chatbot/Chatbot';
 import Compiler from './Pages/MainPage/Chatbot Pages/Compiler/Compiler';
+import Questions from './Pages/MainPage/Chatbot Pages/Questions/Questions';
 import Quiz from './Pages/MainPage/Chatbot Pages/Quiz/Quiz';
 import Settings from './Pages/MainPage/Chatbot Pages/Settings/Settings';
 import Tutorials from './Pages/MainPage/Chatbot Pages/Tutorial/Tutorials';
@@ -97,6 +98,16 @@ function Index() {
                   <Settings />
                 ) : (
                   <Navigate to={{ pathname: '/not_found_page', state: { from: '/settings' } }} />
+                )
+              }
+            />
+            <Route
+              path="/questions"
+              element={
+                isLoggedIn ? (
+                  <Questions />
+                ) : (
+                  <Navigate to={{ pathname: '/not_found_page', state: { from: '/questions' } }} />
                 )
               }
             />

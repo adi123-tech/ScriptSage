@@ -116,6 +116,14 @@
     font-size: 1.5em; /* Adjust the font size as needed */
   }
   
+  .display-quiz-question{
+    position: fixed;
+    top: 5%;
+    left: 34%;
+    background-color: #283142;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+  }
 
   
 
@@ -167,6 +175,11 @@
   left: 12%;
 }
 
+.quiz-module-name {
+  position: fixed;
+  top:11%;
+  left: 40%;
+}
 
 .analyze-quiz{
   position: fixed;

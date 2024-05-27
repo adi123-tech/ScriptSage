@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState,useRef, useEffect } from 'react';
 import './Compiler.css';
 import CompilerNavbar from './CompilerNavbar';
 import Navbar from '../Navbar/Navbar';
@@ -26,6 +26,11 @@ function Compiler() {
     const [showModal, setShowModal] = useState(false);
     const [showModalNothing, setShowModalNothing] = useState(false);
     const [modalLoading, setModalLoading] = useState(false); // New state for modal loading
+    const [selectedQuestion, setSelectedQuestion] = useState(localStorage.getItem('selectedQuestion') || '');
+
+    useEffect(() => {
+            localStorage.setItem('selectedQuestion', selectedQuestion);
+    }, [selectedQuestion]);
 
     useEffect(() => {
         localStorage.setItem('userCode', userCode);
@@ -91,6 +96,32 @@ function Compiler() {
         setExplanation('');
     }
     
+    const [position, setPosition] = useState({ x: 700, y: 230 });
+const [dragging, setDragging] = useState(false);
+const dragRef = useRef();
+
+useEffect(() => {
+  const handleMouseMove = (event) => {
+    if (dragging) {
+      setPosition({
+        x: event.clientX - dragRef.current.offsetWidth / 2,
+        y: event.clientY - dragRef.current.offsetHeight / 2
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
+  document.addEventListener('mousemove', handleMouseMove);
+  document.addEventListener('mouseup', handleMouseUp);
+
+  return () => {
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  };
+}, [dragging]);
       
     return (
         <div className="Compiler">
@@ -99,6 +130,15 @@ function Compiler() {
                 userLang={userLang} setUserLang={setUserLang}
                 fontSize={fontSize} setFontSize={setFontSize}
             />
+            <div
+                className="transferred-question"
+                style={{ top: position.y, left: position.x, cursor: dragging ? 'grabbing' : 'grab' }}
+                ref={dragRef}
+                onMouseDown={() => setDragging(true)}
+                >
+                <p style={{color : 'red'}}>Drag this box where you want</p>
+                {selectedQuestion}
+            </div>
             <div className="main">
                 <div className="left-container">
                     <textarea

@@ -4,6 +4,7 @@ import './quiz.css';
 import { useUser } from '../../../../UserContext';
 import axios from 'axios';
 import CombineLogo from '../../../CombineLogoPage/CombineLogo';
+import Modal from '../Compiler/PopUpPage/Modal';
 
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -16,6 +17,7 @@ function Quiz() {
   const { userId } = useUser();
   const [currentSection, setCurrentSection] = useState(null);
   const [quizResult, setQuizResult] = useState(null);
+  const [showModalNothing, setShowModalNothing] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [sectionCompleted, setSectionCompleted] = useState(new Array(1000).fill(false));
   const [sectionInitiallyWrong, setSectionInitiallyWrong] = useState(new Array(1000).fill(true));
@@ -24,7 +26,7 @@ function Quiz() {
   useEffect(() => {
     // Timer logic
     if (currentSection !== null) {
-      setTimeLeft(1 * 10); // Set initial time for each quiz section (e.g., 10 minutes)
+      setTimeLeft(5 * 60); // Set initial time for each quiz section (e.g., 10 minutes)
     } else {
       setTimeLeft(null);
     }
@@ -537,7 +539,8 @@ function Quiz() {
       setQuizResult(null); // Reset quiz result
       setSelectedAnswers(new Array(sections[sectionIndex].questions.length).fill(null));
     } else {
-      alert("Please unlock this section by scoring 4 or more correct answers in the previous sections.");
+      // alert("Please unlock this section by scoring 4 or more correct answers in the previous sections.");
+      setShowModalNothing(true);
     }
   };
 
@@ -588,7 +591,7 @@ function Quiz() {
   // Render the quiz questions
   const displayQuizQuestions = () => {
     return (
-      <div>
+      <div className='display-quiz-question'>
         <h2>Quiz: {sections[currentSection].topic}</h2>
         <p id="timer">Time Left: {formatTime(timeLeft)}</p>
         <br />
@@ -672,6 +675,7 @@ function Quiz() {
 
   return (
     <>
+    <div className='quiz-module-name'><h1 >Quiz Modules</h1></div>
      <CombineLogo />
     <p className='user-id-quiz'>User ID: {userId}</p>
     <div className='quiz-container'>
@@ -697,6 +701,11 @@ function Quiz() {
         </div>
       )}
     </div>
+    <Modal show={showModalNothing} handleClose={() => setShowModalNothing(false)}>
+    <div style={{ color: 'red', fontWeight: 'bold' }}>
+        Please unlock this section by scoring 4 or more correct answers in the previous sections.
+      </div>
+       </Modal>
     </>
   );
 }

@@ -37,7 +37,8 @@
 .quiz,
 .tutorials,
 .settings,
-.logout {
+.logout,
+.problem {
   background-color: #7F18D8; /* Set background color for all buttons */
 }
 

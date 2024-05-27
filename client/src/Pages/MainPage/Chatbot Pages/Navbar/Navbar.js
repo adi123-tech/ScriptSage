@@ -18,6 +18,11 @@ export default function Navbar() {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/questions" className="navbar-link problem">
+                Problems
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/quiz" className="navbar-link quiz">
               Quiz
             </NavLink>

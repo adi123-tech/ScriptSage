@@ -10,7 +10,7 @@ function Modal({ show, handleClose, children }) {
         <div className="modal-backdrop" onClick={handleClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button className="modal-close" onClick={handleClose}>
-                    &times;
+                    X
                 </button>
                 <div className="modal-body">
                     {children}
