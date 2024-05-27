@@ -17,8 +17,8 @@ function Quiz() {
   const [currentSection, setCurrentSection] = useState(null);
   const [quizResult, setQuizResult] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-  const [sectionCompleted, setSectionCompleted] = useState(new Array(5).fill(false));
-  const [sectionInitiallyWrong, setSectionInitiallyWrong] = useState(new Array(5).fill(true));
+  const [sectionCompleted, setSectionCompleted] = useState(new Array(1000).fill(false));
+  const [sectionInitiallyWrong, setSectionInitiallyWrong] = useState(new Array(1000).fill(true));
   const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
@@ -624,12 +624,16 @@ function Quiz() {
   // Render the quiz result
   const displayQuizResult = () => {
     return (
-      <div className="result">
-        <h3>Quiz Result:</h3>
+      <>
+      <div className='theory'>
+      <h2>Quiz Result:</h2>
         <p>Total Questions: {quizResult.totalQuestions}</p>
         <p style={{ color: '#4CAF50' }}>Correct Answers: {quizResult.correctAnswers}</p>
+        <h4 style={{ color: 'red' }}>Incorrect Answers: {quizResult.totalQuestions - quizResult.correctAnswers}</h4>
+      </div>
+      <div className="result">
         <div className="incorrect-answers">
-          <h4 style={{ color: 'red' }}>Incorrect Answers: {quizResult.totalQuestions - quizResult.correctAnswers}</h4>
+          <h2 style={{ color: 'red' }}>Incorrect Answers Table with Correct Answers:</h2>
           <table className="table-border">
             <thead>
               <tr>
@@ -651,11 +655,11 @@ function Quiz() {
             </tbody>
           </table>
         </div>
-        <div className='end-quiz'>
+      </div>
+      <div className='end-quiz'>
         <button onClick={redirectToStartQuiz}>End Quiz</button>
         </div>
-        
-      </div>
+      </>
     );
   };
 

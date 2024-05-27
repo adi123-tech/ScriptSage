@@ -52,8 +52,40 @@
     transform: scale(1.05);
   }
   
+  .theory{
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    background-color: #283142;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+  }
   .result {
+    height: 80vh;
     margin-top: 60px;
+    position: relative;
+    left: 25%;
+    overflow-y: scroll;
+    background-color: #283142;
+    border-radius: 10px;
+    padding-left: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #434343 #f8f9fa; 
+    padding-right: 20px;
+  }
+  .result::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .result::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+  }
+  
+  .result::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
   }
   
   .result p {
@@ -68,7 +100,7 @@
   .table-border {
     border: 2px solid white;
     background-color: #434343;
-  }
+}
   
   .table-border th,
   .table-border td {
@@ -104,18 +136,18 @@
   scrollbar-color: #434343 #f8f9fa; 
 }
 
-.user-messages::-webkit-scrollbar {
+.quiz-modules::-webkit-scrollbar {
   width: 16px;
   height: 16px;
 }
 
-.user-messages::-webkit-scrollbar-thumb {
+.quiz-modules::-webkit-scrollbar-thumb {
   background: #434343;
   border-radius: 16px;
   box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
 }
 
-.user-messages::-webkit-scrollbar-track {
+.quiz-modules::-webkit-scrollbar-track {
   background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111);
 }
 
@@ -137,9 +169,9 @@
 
 
 .analyze-quiz{
-  position: absolute;
-  bottom: 0px;
-  right: 10px;
+  position: fixed;
+  bottom: 40px;
+  right: 20%;
 }
 
 .analyze-quiz button{
