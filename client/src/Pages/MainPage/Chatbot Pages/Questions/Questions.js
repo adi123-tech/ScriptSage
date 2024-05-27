@@ -1,20 +1,27 @@
-// In Questions.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './questions.css';
 import Navbar from '../Navbar/Navbar';
 import CombineLogo from '../../../CombineLogoPage/CombineLogo';
 import Modal from '../Compiler/PopUpPage/Modal';
 import { NavLink } from 'react-router-dom';
 
-function Question({ questionText, setSelectedQuestion, setShowModalProblem }) {
+function Question({ questionText, index, setSelectedQuestion, setShowModalProblem }) {
+    const [isSelected, setIsSelected] = useState(false);
+
+    useEffect(() => {
+        const storedIndex = localStorage.getItem('QuestionIndex');
+        setIsSelected(index === parseInt(storedIndex));
+    }, [index]);
+
     const handleSelectQuestion = () => {
         setSelectedQuestion(questionText);
-        localStorage.setItem('selectedQuestion', questionText); // Store in local storage
+        localStorage.setItem('selectedQuestion', questionText); // Store question text in local storage
+        localStorage.setItem('QuestionIndex', index); // Store index in local storage
         setShowModalProblem(true);
     };
 
     return (
-        <div className="question-problem">
+        <div className={`question-problem ${isSelected ? 'selected' : ''}`}>
             <p>{questionText}</p>
             <button onClick={handleSelectQuestion}>
                 Transfer to Compiler Page
@@ -34,6 +41,15 @@ function Questions() {
         {
             text: "Write a C program to check if a number is prime.",
         },
+        {
+            text: "Write a C program to calculate the area of a circle.",
+        },
+        {
+            text: "Implement a C program to sort an array using bubble sort.",
+        },
+        {
+            text: "Write a C function to find the maximum of two numbers.",
+        },
     ];
 
     return (
@@ -51,6 +67,7 @@ function Questions() {
                     <Question
                         key={index}
                         questionText={question.text}
+                        index={index} // Pass the index as a prop
                         setSelectedQuestion={setSelectedQuestion}
                         setShowModalProblem={setShowModalProblem} // Passing setShowModalProblem as prop
                     />

@@ -63,3 +63,9 @@
     background-color: #7a4db1; /* Background color after hover */
     transform: scale(1.05); /* Scale effect */
 }
+
+
+.question-problem.selected {
+    background-color: green;
+  }
+  
