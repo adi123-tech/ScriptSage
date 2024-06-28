@@ -52,7 +52,7 @@ const errorStyle = {
     try {
       const phoneNumberInput = document.querySelector('input[name="phoneNumber"]');
       const phoneNumberValue = phoneNumberInput.value;
-      const response = await axios.post('http://localhost:5000/send-otp', {
+      const response = await axios.post('http://localhost:5000/auth/send-otp', {
         to: `+91${phoneNumberValue}`, //Use my number only
       });
 
@@ -232,7 +232,7 @@ const errorStyle = {
     };
   
     // Update the URL to match your server's URL (http://localhost:5000/login)
-    fetch("http://localhost:5000/login", {
+    fetch("http://localhost:5000/auth/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -273,7 +273,7 @@ const errorStyle = {
     };
   
     // Update the URL to match your server's signup route (http://localhost:5000/signup)
-    fetch('http://localhost:5000/signup', {
+    fetch('http://localhost:5000/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -283,6 +283,7 @@ const errorStyle = {
       .then(response => response.text())
       .then(data => {
         try {
+          console.log(data);
           const responseData = JSON.parse(data);
           console.log("Response from server:", responseData);
           console.log("Type of data:", typeof responseData);
