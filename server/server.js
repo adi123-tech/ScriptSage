@@ -9,8 +9,8 @@ const path = require('path');
 const cors = require("cors"); 
 const twilio = require('twilio');
 
-const accountSid = 'ACb2d2a6519d69b54e69450fb5e90c2e9f';
-const authToken = '3c9a9f46ff90f085078a55081b6b8dbb';
+const accountSid = 'ACb58bc9302f2ec068aa4cc044e05a82d9';
+const authToken = '09e63096f9cb5a1f35af5178896dd735';
 const client = twilio(accountSid, authToken);
 
 // Compiler imports:
@@ -244,7 +244,7 @@ app.post('/send-otp', (req, res) => {
   client.messages
     .create({
       body: `Your OTP is: ${otp}`,
-      from: '+16592216878',
+      from: '+12563447933',
       to: to,
     })
     .then(() => {
