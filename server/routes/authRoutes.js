@@ -73,19 +73,19 @@ authRouter.post("/signup", function (req, res) {
             res.send("Error occurred during signup. Please try again.");
           } else {
             // Create a new user with userId
-            const newSignup = new Signup({
+            console.log(userId, name, email, hashedPassword, phoneNumber)
+            const newSignup = new User({
               userId: userId,
               name: name,
               email: email,
               password: hashedPassword,
               phoneNumber: phoneNumber,
             });
-
             // Save the user to the Signup collection
             newSignup.save()
               .then(() => {
                 // Update the Login collection as well
-                const newLogin = new Login({
+                const newLogin = new User({
                   userId: userId,
                   email: email,
                   password: hashedPassword,
@@ -182,7 +182,7 @@ authRouter.post('/send-otp', (req, res) => {
     client.messages
       .create({
         body: `Your OTP is: ${otp}`,
-        from: '+16592216878',
+        from: '+12563447933',
         to: to,
       })
       .then(() => {
